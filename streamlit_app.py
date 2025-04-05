@@ -22,6 +22,12 @@ def vai_al_quiz_allenatori():
     st.session_state.pagina = "quiz_allenatori"
     st.session_state.caricamento = False
 
+def vai_al_quiz_calciatrici():
+    st.session_state.caricamento = True
+    time.sleep(1.5)
+    st.session_state.pagina = "quiz_calciatrici"
+    st.session_state.caricamento = False
+
 def torna_home():
     st.session_state.pagina = "home"
 
@@ -44,6 +50,10 @@ if st.session_state.pagina == "home":
     if st.button("Quale allenatore del VJ Open Femminile sei?    👉"):
         with st.spinner("Caricamento quiz... 🧐"):
             vai_al_quiz_allenatori()
+
+    if st.button("Quale calciatrice del VJ Open Femminile sei?    👉"):
+        with st.spinner("Caricamento quiz... 🧐"):
+            vai_al_quiz_calciatrici()
 
 # Pagina QUIZ INTER
 elif st.session_state.pagina == "quiz_inter":
@@ -481,3 +491,192 @@ elif st.session_state.pagina == "quiz_allenatori":
             st.balloons()  # Altrimenti, i palloncini appaiono
         # Pulsante per tornare alla home
         st.button("↩️ Torna alla home", on_click=torna_home)
+
+# Pagina QUIZ CALCIATRICI
+elif st.session_state.pagina == "quiz_calciatrici":
+    st.markdown("<h1 style='text-align: center; color: #001f3f;'> 🔴⚪ Quale calciatrice del VJ Open Femminile sei? </h1>", unsafe_allow_html=True)
+
+    punteggi_calciatrici = {
+        "Faccio": 0,
+        "Babi": 0,
+        "Cla": 0,
+        "Vero&Vale": 0,
+        "Gloria": 0,
+        "Giada": 0,
+        "Gaudi": 0,
+        "Mame": 0
+    }
+
+    domande_calciatrici = [
+        {
+            "domanda": "1. Durante un allenamento, ti chiedono di improvvisare un passaggio difficile. Tu:",
+            "opzioni": [
+                ("Sei pronta a fare il passaggio perfetto e urli a tutti Seguitemi! anche se non è il momento giusto.", "Faccio"),
+                ("Provi, ma la palla vola fuori dal campo… però ci metti sempre impegno!", "Babi"),
+                ("Corri come una pazza da una parte all’altra del campo per cercare di arrivare alla palla! ", "Cla"),
+                ("Cerchi di fare il passaggio, ma poi inizi a parlare di mille altre cose che non c’entrano.", "Vero&Vale"),
+                ("Chiedi aiuto a tutti, ma nel frattempo continui a correre in modo scoordinato.", "Gloria"),
+                ("Tentativo di dribbling… ma finisco per ingarbugliarmi da sola.", "Giada"),
+                ("Arrivi all’ultimo minuto, con un passaggio spettacolare, ma fai un po’ di caos prima di farlo.", "Gaudi"),
+                ("Guardi le ragazze giocare, fai il tifo e ti prendi un po’ di pausa. ", "Mame"),
+            ]
+        },
+
+        {
+            "domanda": "2. Immagina di essere a un compleanno di squadra, quale attività faresti?",
+            "opzioni": [
+                ("Organizzerei tutto, ma poi sarei la prima al centro della pista con un bicchiere in mano!", "Faccio"),
+                ("Proverei a vincere al gioco della pignatta, anche se ogni tanto mando tutto in aria!", "Babi"),
+                ("Mi farei trovare al centro della pista a ballare!", "Cla"),
+                ("Parlerei per ore con le altre, raccontando la mia teoria su tutto! ", "Vero&Vale"),
+                ("Mi impegnerò in tutto, ma probabilmente mi dimentico di essere un po' scoordinata!", "Gloria"),
+                ("Mi farei coinvolgere in tutto, ma alla fine farò un piccolo spettacolo di dribbling.", "Giada"),
+                ("Arriverò in ritardo, ma almeno avrò portato una torta gigante!", "Gaudi"),
+                ("Sono quella che porta il massimo del tifo e la risata contagiosa! ", "Mame"),
+            ]
+        },
+        {
+            "domanda": "3. Come ti prepari mentalmente prima di una partita importante?",
+            "opzioni": [
+                ("Mi concentro sul mio ruolo da leader, cerco di trasmettere forza alla squadra.", "Faccio"),
+                ("Mi concentro sul passaggio perfetto. ", "Babi"),
+                ("Faccio un bel respiro e cerco di motivare tutte, perché la squadra prima di tutto! ", "Cla"),
+                ("Parlo un sacco, mi piace spiegare tutto, anche quando forse non è il momento giusto.", "Vero&Vale"),
+                ("Chiedi aiuto a tutti, ma nel frattempo continui a correre in modo scoordinato.", "Gloria"),
+                ("Mi faccio prendere dall'emozione e provo a dribblare in ogni situazione, anche se rischio di perdere palla.", "Giada"),
+                ("Arrivo all'ultimo minuto, ma non vedo l'ora di scendere in campo e fare quello che so fare meglio. ", "Gaudi"),
+                ("Faccio il tifo dalla panchina e sono pronta a urlare con tutta la forza! ", "Mame"),
+            ]
+        },
+        {
+            "domanda": "4. Quando un tuo compagno o compagna fa un errore in partita, tu:",
+            "opzioni": [
+                ("Urlo un po’, ma cerco di spronarlo a migliorare! ", "Faccio"),
+                ("Gli dico di non mollare, lo sprono a fare meglio, anche se a volte sono un po' brusca.", "Babi"),
+                ("Mi avvicino e cerco di motivarlo, ricordandogli che siamo una squadra e che dobbiamo lavorare insieme.", "Cla"),
+                ("Parto con mille discorsi e analisi, ma in fondo cerco di farlo con calma, anche se parlo un po' troppo.", "Vero&Vale"),
+                ("Faccio un sorriso e lo incoraggio a continuare, senza farmi troppi problemi, anche perchè di solito sono io.", "Gloria"),
+                ("Gli faccio capire che può fare di meglio...", "Giada"),
+                ("Arrivo a gambe levate e lo incoraggio,ma un po' aggressiva.", "Gaudi"),
+                ("Mi metto a tifare dalla panchina, cercando di farlo sorridere senza troppa pressione. ", "Mame"),
+            ]
+        },
+        {
+            "domanda": "5. Se dovessi descrivere la tua personalità con un animale, quale sarebbe?",
+            "opzioni": [
+                ("Un leone, perché sono sempre pronto a comandare e a guidare la squadra!", "Faccio"),
+                ("Un lupo, forte e determinata, ma a volte un po' irruenta!", "Babi"),
+                ("Un cane da caccia, sempre in movimento e sempre pronta ad aiutare gli altri! ", "Cla"),
+                ("Un pappagallo, che parla sempre e ha sempre qualcosa da dire.", "Vero&Vale"),
+                ("Una scimmia, agile e pronta a saltare da una parte all'altra, anche se un po’ disordinata.", "Giada" ),
+                ("Un orso, che si fa sentire, ma che alla fine trova sempre la sua strada.","Gloria"),
+                ("Una tigre, che arriva sempre al momento giusto per fare il colpo finale.", "Gaudi"),
+                ("Un delfino, che tifa e sorride senza mai perdere l'entusiasmo! ", "Mame"),
+            ]
+        },
+        {
+            "domanda": "6. Se avessi un giorno libero e potessi fare qualsiasi cosa, come lo passeresti?",
+            "opzioni": [
+                ("Penso che farei una giornata super organizzata: un po' di relax, un po' di socializzazione, tutto al momento giusto.", "Faccio"),
+                ("Organizzerei un'uscita con le amiche e, se riesco, cercherei di non mandare il pallone in cielo!", "Babi"),
+                ("Correrei senza sosta in un parco, poi probabilmente mi fermerei per un bel picnic con le amiche.", "Cla"),
+                ("Passerei la giornata a parlare di qualsiasi cosa, magari anche discutendo delle ultime novità!", "Vero&Vale"),
+                ("Probabilmente farei yoga o qualcos’altro che mi aiuti a migliorare la mia coordinazione", "Gloria"),
+                ("Vorrei rimanere tranquilla a casa, fare qualche dribbling tra i cuscini e guardare serie TV.", "Giada"),
+                ("Mi sveglierei tardi, prenderebbe il mio tempo per fare tutto, e poi uscirei con le amiche per un po' di svago. ", "Gaudi"),
+                ("Andrei a vedere una partita di calcio, ma mi limito a tifare per la squadra. ", "Mame"),
+            ]
+        },
+        {
+            "domanda": "7. Se potessi essere un personaggio storico o famoso per un giorno, chi sceglieresti?",
+            "opzioni": [
+                ("Cleopatra, per la leadership e il carisma che ha mostrato nel suo regno.", "Faccio"),
+                ("Albert Einstein, per la sua genialità, anche se un po' distratto nella vita quotidiana.", "Babi"),
+                ("Amelia Earhart, per il coraggio di volare e fare qualcosa di straordinario!", "Cla"),
+                ("Oprah Winfrey, per essere in grado di motivare milioni di persone con parole di saggezza.", "Vero&Vale"),
+                ("Leonardo da Vinci, perché, pur essendo un po' scoordinato, aveva tante passioni e un talento incredibile!", "Gloria"),
+                ("Frida Kahlo, per il suo spirito indomito e la sua capacità di esprimere sé stessa in ogni situazione.", "Giada"),
+                ("Audrey Hepburn, per l'eleganza e il cuore che metteva in tutto ciò che faceva.", "Gaudi"),
+                ("Charlie Chaplin, per il suo umorismo e la sua capacità di far ridere tutti con pochi gesti.", "Mame"),
+            ]
+        },
+        {
+            "domanda": "8. Come reagisci quando qualcuno ti dà un consiglio che non hai chiesto?",
+            "opzioni": [
+                ("Lo ascolto, ma se non mi va lo mando a quel paese. ", "Faccio"),
+                ("Faccio finta di ascoltare, ma alla fine mando la palla fuori, letteralmente e figurativamente.", "Babi"),
+                ("Non dico mai nulla, ma penso sempre: “Ok, va bene, ma io faccio come voglio!”", "Cla"),
+                ("A volte rispondo con un commento sferzante, ma non smetto mai di parlare e alla fine divento la chiacchierona della situazione.", "Vero&Vale"),
+                ("Non capisco nemmeno se sia un consiglio o una critica… ma continuo comunque per la mia strada.", "Gloria"),
+                ("Continuo a fare il mio, anche se i consigli non sono proprio i migliori. Ma vabbè, a volte è il pensiero che conta!", "Giada"),
+                ("Mi faccio dare il consiglio, ma lo faccio sempre come dico io! ", "Gaudi"),
+                ("Resto in silenzio e annuisco, così nessuno si arrabbia con me.", "Mame"),
+            ]
+        },
+        {
+            "domanda": "9. Quando sei in ritardo, come ti giustifichi?",
+            "opzioni": [
+                ("Semplice, dico che ero impegnata a fare qualcosa di importante e non volevo disturbare il gruppo.", "Faccio"),
+                ("Era tutto pronto, ma il pallone è volato fuori e ho dovuto andare a prenderlo!", "Babi"),
+                ("Stavo solo correndo per tenere il ritmo! Peccato che ero solo in ritardo. ", "Cla"),
+                ("Scusate, avevo un sacco di cose da dire!", "Vero&Vale"),
+                ("Ok, forse sono un po’ scoordinata con il tempo, ma sono pronta per darvi il massimo!", "Gloria"),
+                ("Mi stavo concentrando sul dribbling!", "Giada"),
+                ("Ho fatto tardi perché sono troppo brava e devo fare tutto per prima!", "Gaudi"),
+                ("Mi sono distratta guardando la partita!", "Mame"),
+            ]
+        },
+        {
+            "domanda": "Giulia, la creatrice di questo quiz, se non fosse impegnata a fare quiz, cosa farebbe per divertirsi?",
+            "opzioni": [
+                ("Sembra che stia sempre inventando qualcosa di nuovo, probabilmente sarebbe occupata a scrivere quiz per qualsiasi altra cosa, anche per le piante da appartamento.", "Giulia"),
+                ("Si rifugia nei suoi hobby più creativi, come disegnare strani disegni e mandarle alle amiche per farle impazzire.", "Giulia"),
+                ("Starebbe sicuramente cercando di fare acrobazie con il trike, anche se probabilmente finirebbe per cadere.  ", "Giulia"),
+                ("Passerebbe ore su internet a guardare video di cose random, tipo macchine da corsa o esperimenti scientifici che non servono a nulla. ", "Giulia"),
+                ("Passerebbe una giornata a pensare a nuove idee geniali, ma senza mai prenderle troppo sul serio.", "Giulia"),
+                ("Si metterebbe a fare quiz a caso, tipo Quale piante sei? o Che tipo di caffè rappresenti? una vera amante della cultura quiz. ", "Giulia"),
+            ]
+        },
+    ]
+
+    for d in domande_calciatrici:
+        st.markdown(f"### {d['domanda']}")
+        risposta = st.radio("", [opt[0] for opt in d["opzioni"]], key=d["domanda"])
+        for testo, giocatrice in d["opzioni"]:
+            if risposta == testo:
+                punteggi_calciatrici[giocatrice] += 1
+
+    if st.button("🏆 Scopri chi sei!"):
+        giocatore = max(punteggi_calciatrici, key=punteggi_calciatrici.get)
+
+        descrizioni = {
+            "Faccio": "Leader grintosa, sempre pronta a dare tutto!",
+            "Babi": "Mancina, forte a volte un po’ brusca, ma dal cuore grande e tenera.",
+            "Cla": "Instancabile, capocannoniere, umile e sempre nel posto giusto al momento giusto.",
+            "Vero&Vale": "2in1, Chiacchierone e fastidiose, ma fanno sempre il loro dovere in difesa.",
+            "Gloria": "Scombinata ma testarda, non molla mai anche quando è fuori tempo.",
+            "Giada": "Centrocampo di dribbling e parole, fa il suo ma potrebbe fare meno chiacchiere.",
+            "Gaudi": "Ritardataria, ribelle, ma segna sempre nei momenti decisivi.",
+            "Mame": "Ex velocissima, ora tifosa appassionata, sempre positiva e piena di energia!"
+        }
+
+        st.markdown(f"<h2 style='text-align: center;'>🥳 Sei {giocatrice}! 🥳</h2>", unsafe_allow_html=True)
+
+        # Emojis e testuale grafico
+        st.markdown("""
+            <div style='font-size: 2em; text-align: center;'>🎉🎉🎉</div>
+        """, unsafe_allow_html=True)
+
+        # GIF esultanza
+        gif_url = "/workspaces/inter-quiz-1/data/Video WhatsApp 2025-04-05 ore 23.13.51_1200ab29.mp4"
+        st.image(gif_url, caption="YAY!!!", use_container_width=True)
+
+
+        st.markdown(f"<div style='padding: 1rem; background-color: #e6f2ff; border-left: 5px solid #001f3f; font-size: 1.2em;'>{descrizioni[giocatore]}</div>", unsafe_allow_html=True)
+
+        # Anima la celebrazione
+        st.balloons()
+
+        # Pulsante per tornare alla home
+        st.button("↩️ Torna alla home", on_click=torna_home)
+    
