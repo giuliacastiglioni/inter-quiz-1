@@ -504,7 +504,8 @@ elif st.session_state.pagina == "quiz_calciatrici":
         "Gloria": 0,
         "Giada": 0,
         "Gaudi": 0,
-        "Mame": 0
+        "Mame": 0,
+        "Giulia": 0
     }
 
     domande_calciatrici = [
