@@ -1,47 +1,53 @@
 import streamlit as st
 import time
 
-st.set_page_config(page_title="Quale calciatore dell'Inter sei?", page_icon="⚽", layout="centered")
+st.set_page_config(page_title="**Quiz!!!**", page_icon="⚽", layout="centered")
 
+# Imposta la sessione per tenere traccia della pagina corrente
 if "pagina" not in st.session_state:
-    st.session_state.pagina = "intro"
+    st.session_state.pagina = "home"
 
 if "caricamento" not in st.session_state:
     st.session_state.caricamento = False
 
-def vai_al_quiz():
+def vai_al_quiz_inter():
     st.session_state.caricamento = True
     time.sleep(1.5)
-    st.session_state.pagina = "quiz"
+    st.session_state.pagina = "quiz_inter"
+    st.session_state.caricamento = False
+
+def vai_al_quiz_allenatori():
+    st.session_state.caricamento = True
+    time.sleep(1.5)
+    st.session_state.pagina = "quiz_allenatori"
     st.session_state.caricamento = False
 
 def torna_home():
-    st.session_state.pagina = "intro"
+    st.session_state.pagina = "home"
 
-# Pagina INTRO
-if st.session_state.pagina == "intro":
+# Pagina HOME
+if st.session_state.pagina == "home":
     st.markdown("""
-        <div style='
-            background: linear-gradient(to bottom right, #001f3f, #0074D9);
-            padding: 4rem;
-            border-radius: 20px;
-            text-align: center;
-            color: white;
-        '>
-            <h1 style='font-size: 3em;'>⚫🔵 Quale calciatore dell'Inter sei?</h1>
-            <p style='font-size: 1.3em;'>Scopri quale nerazzurro ti rappresenta di più!<br>Rispondi a qualche domanda e trova il tuo gemello in campo.</p>
+        <div style='background: linear-gradient(to bottom right, #001f3f, #0074D9); padding: 4rem; border-radius: 20px; text-align: center; color: white;'>
+            <h1 style='font-size: 3em;'>Scegli il tuo quiz!</h1>
+            <p style='font-size: 1.3em;'>Benvenuto! Puoi scegliere di scoprire quale calciatore dell'Inter sei o quale allenatore della squadra Vittoria Junior ti somiglia di più!</p>
         </div>
     """, unsafe_allow_html=True)
 
     st.markdown("<br>", unsafe_allow_html=True)
 
-    placeholder = st.empty()
-    if placeholder.button("Inizia il test 👉", type="primary"):
-        with st.spinner("Caricamento domande... 🧐"):
-            vai_al_quiz()
+    # Pulsanti per scegliere il quiz
+    if st.button("Quale calciatore dell'Inter sei?    👉"):
+        with st.spinner("Caricamento quiz... 🧐"):
+            vai_al_quiz_inter()
 
-# Pagina QUIZ
-elif st.session_state.pagina == "quiz":
+    if st.button("Quale allenatore di VJ sei?    👉"):
+        with st.spinner("Caricamento quiz... 🧐"):
+            vai_al_quiz_allenatori()
+
+# Pagina QUIZ INTER
+elif st.session_state.pagina == "quiz_inter":
+    # Inserisci qui il codice del quiz sull'Inter che hai già scritto
     st.markdown("<h1 style='text-align: center; color: #001f3f;'>⚫🔵 Quale calciatore dell'Inter sei?</h1>", unsafe_allow_html=True)
 
     punteggi = {
@@ -215,13 +221,13 @@ elif st.session_state.pagina == "quiz":
             ]
         },
         {
-            "domanda": "Finale. Giulia, la creatrice di questo quiz, cosa fa quando non sta creando quiz su calciatori?",
+            "domanda": "Giulia, la creatrice di questo quiz, cosa fa quando non sta creando quiz su calciatori?",
             "opzioni": [
                 ("Disegna cose a caso e le manda alle sue amiche.","Nicolò Barella"),
                 ("Si perde a guardare video di formula 1 su Internet, ovviamente.","Federico Dimarco"),
                 (" Colleziona tazze di caffè vuote per fare un museo.", "Yann Sommer"),
                 ("Si allena con il trike e diventa un’esperta di acrobazie.", "Lautaro Martinez"),
-                ("Scivola sul pavimento di casa con le calze antiscivolo come se fosse un’ala.", "Hakan Çalhanoğlu"),
+                ("Suona canzoni a caso e le posta su instagram senza successo.", "Hakan Çalhanoğlu"),
                 ("Si traveste da allenatore di calcio e fa finta di essere il capo della squadra.", "Alessandro Bastoni"),
                 ("Organizza una maratona di serie TV, senza interruzioni, solo snack.", "Denzel Dumfries"),
                 ("Insegna a sua sorella a giocare a calcio, ma lei non è molto brava.", "Marcus Thuram"),
@@ -283,5 +289,195 @@ elif st.session_state.pagina == "quiz":
         # Anima la celebrazione
         st.balloons()
 
+        # Pulsante per tornare alla home
+        st.button("↩️ Torna alla home", on_click=torna_home)
+    
+    pass  # Mantieni il codice già esistente per il quiz dell'Inter
+
+# Pagina QUIZ ALLENATORI VJ
+elif st.session_state.pagina == "quiz_allenatori":
+    st.markdown("<h1 style='text-align: center; color: #001f3f;'> 🔴⚪ Quale allenatore Open Femminile del VJ sei?</h1>", unsafe_allow_html=True)
+
+    punteggi_allenatori = {
+        "Marco": 0,
+        "Davide": 0,
+        "Andrea": 0,
+        "Franco": 0
+    }
+
+    domande_allenatori = [
+        {
+            "domanda": "1. Immagina di essere alla vigilia di una partita importante, come ti prepari mentalmente?",
+            "opzioni": [
+                ("Cerco di concentrarmi sulle cose pratiche, ma mi sento sempre un po' nervoso riguardo a come andrà.", "Davide"),
+                ("Mi piace mantenere la calma, penso che la tranquillità sia la chiave per affrontare qualsiasi situazione.", "Andrea"),
+                (" Preferisco non essere troppo presente, ma quando arrivo, voglio che tutti siano focalizzati sulla strategia.", "Franco"),
+                ("Mi piace fare un bel discorso motivazionale, anche se a volte rischio di parlare troppo a lungo.", "Marco"),
+            ]
+        },
+        {
+            "domanda": "2. Se dovessi dare un consiglio a un compagno di squadra che si sta preparando per una sfida, come ti comporteresti?",
+            "opzioni": [
+                ("Gli direi di rimanere fedele a sé stesso, che la calma è la miglior arma.", "Andrea"),
+                ("Gli direi di pensare a se stesso e di concentrarsi sull'ottenere il massimo da ogni momento.", "Marco"),
+                ("Gli darei un consiglio pratico e tecnico, basato su ciò che potrebbe davvero fare meglio nella partita.", "Franco"),
+                ("Cercherei di rassicurarlo, anche se il mio nervosismo potrebbe emergere nelle parole.", "Davide"),
+                               
+            ]
+        },
+        {
+            "domanda": "3. Come preferisci allenare?",
+            "opzioni": [
+                ("Con esercizi che migliorano la tattica e il gioco di squadra", "Franco"),
+                ("Con sessioni di gruppo per lavorare sull'unione della squadra", "Davide"),
+                ("Con allenamenti intensi e molto dinamici", "Andrea"),
+                ("Con esercizi mirati alla tecnica individuale", "Marco"),
+            ]
+        },
+        {
+            "domanda": "4. Dopo una lunga giornata di allenamento, come ti rilassi?",
+            "opzioni": [
+                ("Cerco un po' di tempo per me stesso, magari con un drink in mano per rilassarmi e fare due chiacchiere.", "Marco"),
+                (" Cerco di staccare dalla tensione, magari pensando a come posso migliorare la squadra", "Andrea" ),
+                ("Mi piace andare a letto presto, ma se devo fare due chiacchiere, sono sempre pronto a ascoltare gli altri.","Davide"),
+                ("Probabilmente sono già a casa, ma quando sono con la squadra, cerco sempre di offrire consigli e supporto.", "Franco"),
+            ]
+        },
+        {
+            "domanda": "5. In un gruppo di amici, come ti comporteresti se qualcuno facesse una battuta divertente?",
+            "opzioni": [
+                ("Non riuscirei a fare a meno di raccontare la mia versione della storia, aggiungendo dettagli che potrebbero renderla ancora più lunga!", "Marco"),
+                ("Mi farei una bella risata, ma non forzerei nulla. L'importante è essere naturali.", "Andrea"),
+                ("Probabilmente riderei e magari aggiungerei qualche commento sul fatto che non sempre le cose vanno come vorremmo.", "Davide"),
+                ("Sorriderei e forse farei qualche commento divertente, ma sempre con il mio stile più serio.", "Franco"),
+            ]
+        },
+        {
+            "domanda": "6. Se un tuo compagno fosse in difficoltà, come reagiresti?",
+            "opzioni": [
+                ("Gli direi con calma cosa fare per risolvere il problema, ma magari dimenticherei qualche dettaglio!", "Franco"),
+                ("Cercherei di aiutarlo, anche se potrei diventare un po' troppo insistente nel dirgli cosa fare.", "Marco"),
+                ("Gli darei qualche consiglio, ma non senza sentirmi agitato nel vedere che non sta facendo tutto perfettamente.", "Davide"),
+                ("Lo incoraggerei a mantenere la calma e lo rassicurerei che ce la farà se rimane tranquillo.", "Andrea"),
+                
+            ]
+        },
+        {
+            "domanda": "7. Quando ti trovi di fronte a una decisione importante, come ti comporti?",
+            "opzioni": [
+                ("Mi sento sempre sotto pressione, ma cerco comunque di fare del mio meglio, anche se sono un po' ansioso.", "Davide"),
+                ("Mi piace prendere il controllo della situazione, a volte anche troppo, per essere sicuro che tutto vada come voglio.", "Marco"),
+                ("Penso che la calma e la riflessione siano le cose più importanti. Non mi piace affrettare le decisioni.", "Andrea"),
+                ("Preferisco osservare un po' da lontano e poi intervenire con un piano che mi sembri giusto, ma non sempre mi ricordo ogni dettaglio.", "Franco"),
+            ]
+        },
+        {
+            "domanda": "8. Immagina di dover scegliere un leader per la squadra: quale qualità considereresti più importante?",
+            "opzioni": [
+                ("Qualcuno che sappia sempre come attirare l'attenzione, parlare tanto e, soprattutto, che non abbia paura di mettersi in mostra.", "Marco"),
+                ("Qualcuno che riesca a mantenere la calma anche nelle situazioni più stressanti, ma che sappia far capire la sua ansia senza risultare invadente.", "Davide"),
+                ("Qualcuno che sappia ascoltare, dare consigli senza far sentire nessuno sotto pressione e che sia un punto di riferimento per tutti.", "Andrea"),
+                ("Qualcuno che sia serio, ma con una buona conoscenza della tattica, che sia sempre pronto a intervenire quando necessario.", "Franco"),
+            ]
+        }, 
+        {
+            "domanda": "9. Se qualcosa va storto e le cose non vanno come previsto, come reagisci?",
+            "opzioni": [
+                ("Mi prendo il mio tempo per riflettere, cercando di mantenere la calma e risolvere con tranquillità.", "Andrea"),
+                ("Cerco di analizzare la situazione con lucidità, anche se a volte posso sembrare distante.", "Franco"),
+                ("Sbuffo, ma cerco sempre di fare in modo che la situazione si sistemi... anche se mi lamento un po’.", "Marco"),
+                ("Mi sento agitato, ma faccio del mio meglio per rimanere calmo e risolvere il problema.", "Davide"),
+                
+            ]
+        },
+        {
+            "domanda": "10. Quando ti arrabbi, come reagisci?",
+            "opzioni": [
+                ("La mia rabbia esplode subito.", "Marco"),
+                ("Cerco di non arrabbiarmi mai, ma se succede, sono più introverso e cerco di riflettere sulla situazione.", "Franco"),
+                ("Mi arrabbio, ma cerco di non farlo vedere troppo.", "Davide"),
+                ("Cerco di rimanere calmo, anche se la rabbia è dentro di me. Preferisco non mostrarla.", "Andrea"),
+                
+            ]
+        },
+        {
+            "domanda": "11. Se qualcuno ti chiedesse di organizzare una festa, cosa faresti?",
+            "opzioni": [
+                ("Pianificherei una festa super tranquilla, magari con un po’ di musica soft… e tanta fanta.", "Davide"),
+                ("Probabilmente mi preoccuperei di come farli sentire a loro agio, cercando di non farla diventare troppo “seriosa", "Andrea"),
+                (" Organizzerei tutto alla perfezione, ma mi assicurerei che tutti sappiano che la festa è mia.", "Marco"),
+                ("Se mi invitano, ok. Se no… beh, direi che non sono poi così tanto interessato a fare il party planner.", "Franco"),
+            ]
+        },
+        {
+            "domanda": "12. Quando senti parlare di una vacanza all’improvviso, cosa fai?",
+            "opzioni": [
+                ("Mi precipito a prendere le valigie, perché mi serve un po’ di relax… e un po’ di riconoscimento.", "Marco"),
+                ("Inizio a fare mille piani e a pensare a tutte le cose che dovrò organizzare. Più stressante che rilassante.", "Davide"),
+                ("Vado al volo! Non mi preoccupo di nulla. Se qualcuno ha bisogno di aiuto, vado a darlo.", "Andrea"),
+                (" Se posso portare il mio lavoro con me, va bene. Se no… chi se ne importa!", "Franco"),
+            ]
+        },
+        {
+            "domanda": "13. Se dovessi descrivere la tua giornata ideale, come sarebbe?",
+            "opzioni": [
+                ("Una giornata chill con gli amici.", "Andrea"),
+                ("Un giorno in cui sono il centro dell'attenzione e tutti si accorgono di quanto sia fantastico ciò che faccio!", "Marco"),
+                ("Una giornata lontano da tutto, con il tempo per pensare e fare quello che voglio senza fretta.", "Franco"),
+                ("Una giornata perfetta sarebbe una che non mi faccia ansiare troppo, magari con una bella serata di relax.", "Davide"),
+                
+            ]
+        },
+        {
+            "domanda": "14. Se qualcuno ti chiede un favore, come rispondi?",
+            "opzioni": [
+                ("Eh, se mi va di farlo, lo farò. Se no, non posso promettere nulla.", "Franco"),
+                ("Cerco di farlo. O almeno ci provo.", "Davide"),
+                ("Va bene, ma sappi che tutto ciò che faccio ha un prezzo. Ah, ma lo faccio per te!", "Marco"),
+                ("Non c'è problema, aiutarti è la cosa più naturale!", "Andrea"),
+                
+            ]
+        },
+
+        {
+            "domanda": "Giulia, la creatrice di questo quiz sugli allenatori, cosa fa quando non sta creando quiz su allenatori?",
+            "opzioni": [
+                ("Si perde a suonare canzoni che nessuno ascolterà.", "Franco"),
+                ("Si diverte a fare imitazioni di allenatori e scoppia a ridere da sola.", "Davide"),
+                ("Passa il tempo a inventare quiz su argomenti che nemmeno sa bene.", "Marco"),
+                ("Si allena a risolvere enigmi impossibili e si sente un genio.", "Andrea"), 
+            ]        
+        }
+        # Aggiungi altre domande come queste
+    ]
+
+    for d in domande_allenatori:
+        st.markdown(f"### {d['domanda']}")
+        risposta = st.radio("", [opt[0] for opt in d["opzioni"]], key=d["domanda"])
+        for testo, allenatore in d["opzioni"]:
+            if risposta == testo:
+                punteggi_allenatori[allenatore] += 1
+
+    if st.button("🏆 Scopri chi sei!"):
+        allenatore = max(punteggi_allenatori, key=punteggi_allenatori.get)
+
+        descrizioni_allenatori = {
+            "Marco": "Autocentrato, loquace, competitivo.",
+            "Andrea": "Calmo, riflessivo, riesce a gestire ogni situazione.",
+            "Davide": "Energico, sempre pronto a dare il massimo.",
+            "Franco": "Equilibrato e sempre alla ricerca della soluzione giusta.",
+        }
+
+            
+        st.markdown(f"<h2 style='text-align: center;'>🥳 Sei {allenatore}! 🥳</h2>", unsafe_allow_html=True)
+
+        # Descrizione allenatore
+        st.markdown(f"<div style='padding: 1rem; background-color: #e6f2ff; border-left: 5px solid #001f3f; font-size: 1.2em;'>{descrizioni_allenatori[allenatore]}</div>", unsafe_allow_html=True)
+
+        # Anima la celebrazione
+        if allenatore == "Marco":
+            st.snow()  # La neve appare se l'allenatore è Marco
+        else:
+            st.balloons()  # Altrimenti, i palloncini appaiono
         # Pulsante per tornare alla home
         st.button("↩️ Torna alla home", on_click=torna_home)
