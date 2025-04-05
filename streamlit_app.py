@@ -36,7 +36,7 @@ if st.session_state.pagina == "home":
     st.markdown("""
         <div style='background: linear-gradient(to bottom right, #001f3f, #0074D9); padding: 4rem; border-radius: 20px; text-align: center; color: white;'>
             <h1 style='font-size: 3em;'>Scegli il tuo quiz!</h1>
-            <p style='font-size: 1.3em;'>Benvenuto! Puoi scegliere di tanti quiz e test diversi! Giulia non ha niente da fare nella vita! </p>
+            <p style='font-size: 1.3em;'>Benvenuto! Puoi scegliere di fare tanti quiz e test diversi! Giulia non ha niente da fare nella vita! </p>
         </div>
     """, unsafe_allow_html=True)
 
