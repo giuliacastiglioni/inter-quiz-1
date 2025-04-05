@@ -505,8 +505,7 @@ elif st.session_state.pagina == "quiz_calciatrici":
         "Giada": 0,
         "Gaudi": 0,
         "Mame": 0,
-        "Giulia": 0
-    }
+        }
 
     domande_calciatrici = [
         {
@@ -627,17 +626,6 @@ elif st.session_state.pagina == "quiz_calciatrici":
                 ("Mi sono distratta guardando la partita!", "Mame"),
             ]
         },
-        {
-            "domanda": "Giulia, la creatrice di questo quiz, se non fosse impegnata a fare quiz, cosa farebbe per divertirsi?",
-            "opzioni": [
-                ("Sembra che stia sempre inventando qualcosa di nuovo, probabilmente sarebbe occupata a scrivere quiz per qualsiasi altra cosa, anche per le piante da appartamento.", "Giulia"),
-                ("Si rifugia nei suoi hobby più creativi, come disegnare strani disegni e mandarle alle amiche per farle impazzire.", "Giulia"),
-                ("Starebbe sicuramente cercando di fare acrobazie con il trike, anche se probabilmente finirebbe per cadere.  ", "Giulia"),
-                ("Passerebbe ore su internet a guardare video di cose random, tipo macchine da corsa o esperimenti scientifici che non servono a nulla. ", "Giulia"),
-                ("Passerebbe una giornata a pensare a nuove idee geniali, ma senza mai prenderle troppo sul serio.", "Giulia"),
-                ("Si metterebbe a fare quiz a caso, tipo Quale piante sei? o Che tipo di caffè rappresenti? una vera amante della cultura quiz. ", "Giulia"),
-            ]
-        },
     ]
 
     for d in domande_calciatrici:
@@ -668,12 +656,7 @@ elif st.session_state.pagina == "quiz_calciatrici":
             <div style='font-size: 2em; text-align: center;'>🎉🎉🎉</div>
         """, unsafe_allow_html=True)
 
-        # GIF esultanza
-        gif_url = "/workspaces/inter-quiz-1/data/Video WhatsApp 2025-04-05 ore 23.13.51_1200ab29.mp4"
-        st.image(gif_url, caption="YAY!!!", use_container_width=True)
-
-
-        st.markdown(f"<div style='padding: 1rem; background-color: #e6f2ff; border-left: 5px solid #001f3f; font-size: 1.2em;'>{descrizioni[giocatore]}</div>", unsafe_allow_html=True)
+        st.markdown(f"<div style='padding: 1rem; background-color: #e6f2ff; border-left: 5px solid #001f3f; font-size: 1.2em;'>{descrizioni[giocatrice]}</div>", unsafe_allow_html=True)
 
         # Anima la celebrazione
         st.balloons()
