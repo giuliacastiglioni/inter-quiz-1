@@ -636,7 +636,7 @@ elif st.session_state.pagina == "quiz_calciatrici":
                 punteggi_calciatrici[giocatrice] += 1
 
     if st.button("🏆 Scopri chi sei!"):
-        giocatore = max(punteggi_calciatrici, key=punteggi_calciatrici.get)
+        giocatrice = max(punteggi_calciatrici, key=punteggi_calciatrici.get)
 
         descrizioni = {
             "Faccio": "Leader grintosa, sempre pronta a dare tutto!",
