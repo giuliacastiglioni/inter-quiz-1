@@ -41,7 +41,7 @@ if st.session_state.pagina == "home":
         with st.spinner("Caricamento quiz... 🧐"):
             vai_al_quiz_inter()
 
-    if st.button("Quale allenatore di VJ sei?    👉"):
+    if st.button("Quale allenatore del VJ Open Femminile sei?    👉"):
         with st.spinner("Caricamento quiz... 🧐"):
             vai_al_quiz_allenatori()
 
