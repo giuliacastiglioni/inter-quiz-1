@@ -2104,7 +2104,7 @@ elif st.session_state.pagina == "quiz_sport":
             "domanda": "Se fossi in un ambiente estremamente competitivo, come reagiresti?",
             "opzioni": [
                 ("Mi concentrerei sul miglioramento continuo, come un motore che non si ferma mai.", "Formula 1"),
-                ("Mi faresti notare, non con la forza, ma con la precisione.", "Tennis"),
+                ("Mi farei notare, non con la forza, ma con la precisione.", "Tennis"),
                 ("Sfiderai chiunque, ma con la calma di sapere che la mia squadra è sempre con me.", "Pallavolo"),
                 ("Sfrutterei ogni mossa con velocità e determinazione, cercando di arrivare primo.", "Atletica leggera"),
                 ("Cercherei di controllare il ritmo, ma anche di lasciare che gli altri si distraggano.", "Basket"),
