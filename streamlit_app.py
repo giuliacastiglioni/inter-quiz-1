@@ -28,6 +28,12 @@ def vai_al_quiz_calciatrici():
     st.session_state.pagina = "quiz_calciatrici"
     st.session_state.caricamento = False
 
+def vai_al_quiz_cocomere():
+    st.session_state.caricamento = True
+    time.sleep(1.5)
+    st.session_state.pagina = "quiz_cocomere"
+    st.session_state.caricamento = False
+
 def torna_home():
     st.session_state.pagina = "home"
 
@@ -54,6 +60,10 @@ if st.session_state.pagina == "home":
     if st.button("Quale calciatrice del VJ Open Femminile sei?    👉"):
         with st.spinner("Caricamento quiz... 🧐"):
             vai_al_quiz_calciatrici()
+
+    if st.button("Quale cocomera sei?    👉"):
+        with st.spinner("Caricamento quiz... 🧐"):
+            vai_al_quiz_cocomere()
 
 # Pagina QUIZ INTER
 elif st.session_state.pagina == "quiz_inter":
@@ -664,3 +674,278 @@ elif st.session_state.pagina == "quiz_calciatrici":
         # Pulsante per tornare alla home
         st.button("↩️ Torna alla home", on_click=torna_home)
     
+# COCOMERE
+elif st.session_state.pagina == "quiz_cocomere":
+    st.markdown("<h1 style='text-align: center; color: #001f3f;'> 🌸🥒 Quale cocomera sei? </h1>", unsafe_allow_html=True)
+
+    punteggi_cocomere = {
+        "Faccio": 0,
+        "Babi": 0,
+        "Cla": 0,
+        "Mame": 0,
+        "Marti Russo": 0,
+        "Marti Casella": 0,
+        "Cata": 0,
+        "Ele": 0,
+        "Giulia": 0,
+        }
+
+    domande_cocomere = [
+        {
+            "domanda": "1. È sabato sera: cosa stai facendo?",
+            "opzioni": [
+                ("Sono a una festa in spiaggia con un Gin in mano e l’Inter nel cuore!", "Faccio"),
+                ("Sto preparando un allenamento fichissimo per le ragazze con la mia partner in crime.", "Babi"),
+                ("Sto guardando una partita NCAA mentre faccio esperimenti di fisica nucleare.", "Cla"),
+                ("Porto a spasso Dante mentre racconto una storia buffa su Mario.", "Mame"),
+                ("Invento una parola nuova mentre ballo e rido in mezzo a tutti.", "Marti Russo"),
+                ("Scrivo la mia tesi mentre sistemo i portieri e organizzo l’uscita scout.", "Marti Casella"),
+                ("Sto esplorando Utrecht o organizzando il mio viaggio in Finlandia.", "Cata"),
+                ("Sono a una riunione scout o sto risolvendo equazioni mentre curo il mio ginocchio.", "Ele"),
+                ("Guardo un documentario sulla Formula 1 mentre disegno una cocomera epica.", "Giulia")
+            ]
+        },
+        {
+            "domanda": "2. Che tipo di allenatrice saresti?",
+            "opzioni": [
+                ("Grintosa, diretta e sempre con un caffè in mano.", "Faccio"),
+                ("Dolce ma determinata: ti sprono con il cuore!", "Babi"),
+                ("Tecnica, precisa e con un pizzico di basket power!", "Cla"),
+                ("Ironica, allegra e con il fischietto sempre pronto (magari mentre porto Dante).", "Mame"),
+                ("Urlante d’entusiasmo e piena di frasi in italo-inglese!", "Marti Russo"),
+                ("Organizzatissima, ma attenta a ogni dettaglio… e occhio se mi arrabbio!", "Marti Casella"),
+                ("Connessa su Zoom mentre alleno in finlandese e faccio il tifo in milanese.", "Cata"),
+                ("Scout style: empatia, rispetto e mille impegni!", "Ele"),
+                ("Ansiosa all’inizio, ma con tanto cuore e voglia di far bene.", "Giulia")
+            ]
+        },
+        {
+            "domanda": "3. Il tuo outfit ideale per una gita in montagna?",
+            "opzioni": [
+                ("Un costume sotto i pantaloncini, non si sa mai si finisce al mare.", "Faccio"),
+                ("Tuta da ginnastica e scarpe comode, pronta a tutto!", "Babi"),
+                ("Pantaloni tecnici, scarponi e cuffiette con podcast sportivo.", "Cla"),
+                ("Qualcosa che Dante non possa distruggere mentre salgo il sentiero.", "Mame"),
+                ("Qualcosa di colorato e comodo, da scattare selfie!", "Marti Russo"),
+                ("Scarponcini, zaino pieno e fischietto: sono sempre l’allenatrice anche in montagna.", "Marti Casella"),
+                ("Zaino da escursionismo olandese, tabella meteo finlandese e via!", "Cata"),
+                ("Zaino scout, borraccia, kit pronto soccorso e… una corda di sicurezza.", "Ele"),
+                ("Pantaloni tecnici, taccuino per appunti e un libro nello zaino, nel caso.", "Giulia")
+            ]
+        },
+        {
+            "domanda": "4. Sei in vacanza con le cocomere: che tipo di viaggio scegli?",
+            "opzioni": [
+                ("Un weekend sportivo con tornei di calcetto e basket, ovviamente!", "Cla"),
+                ("Un viaggio culturale tra musei e città d’arte… ma con tappa obbligata in uno stadio!", "Faccio"),
+                ("Un’avventura in tenda tra le montagne, con falò e chitarra!", "Giulia"),
+                ("Un viaggio mare, sole e relax, magari con un bel cocktail in mano!", "Babi"),
+                ("Un interrail in Nord Europa con tappe casuali e sorprese continue!", "Cata"),
+                ("Un on the road tra Irlanda e Scozia per cercare la vera me stessa!", "Marti Russo"),
+                ("Un viaggio organizzato al minuto, ma con il cuore aperto a ogni imprevisto!", "Ele"),
+                ("Un viaggio di studio che diventa anche vacanza… basta avere il cane dietro!", "Mame"),
+                ("Un ritiro spirituale tra scout, montagna e silenzio… ma portando il pallone!", "Marti Casella")
+            ]
+        },
+        {
+            "domanda": "5. Che ruolo hai nel gruppo?",
+            "opzioni": [
+                ("Sono quella che si prende cura di tutti, magari con un po’ troppa energia!", "Marti Russo"),
+                ("Organizzo tutto e tengo i conti in ordine, anche se sembro un po’ burbera!", "Marti Casella"),
+                ("Faccio battute a raffica e sdrammatizzo ogni momento!", "Mame"),
+                ("Sono quella che ha sempre lo zaino pronto e una canzone da suonare.", "Giulia"),
+                ("Sono l’ancora nei momenti di crisi, tranquilla e presente.", "Ele"),
+                ("Sono quella che spinge tutti a dare il massimo e crederci fino in fondo!", "Cla"),
+                ("Ho sempre il telefono in mano, ma sto mandando messaggi motivazionali!", "Babi"),
+                ("Capitano non solo in campo, ma anche nel cuore delle cocomere!", "Faccio"),
+                ("Spunto da una nazione diversa ogni mese, ma ci sono sempre!", "Cata")
+            ]
+        },
+        {
+            "domanda": "6. È venerdì sera, che fai?",
+            "opzioni": [
+                ("Sono al lavoro… ma con una playlist calcistica e la testa al weekend!", "Babi"),
+                ("Mi rilasso con una tisana, Netflix e mille sogni in testa.", "Ele"),
+                ("Sono a una festa, e probabilmente sto parlando metà in inglese e metà in italiano.", "Marti Russo"),
+                ("Sto scrivendo la tesi, ma sogno di essere a San Siro.", "Giulia"),
+                ("Ho allenamento… o una partita… o un’altra squadra da gestire!", "Cla"),
+                ("Sto facendo i bagagli per una nuova meta (forse nordica).", "Cata"),
+                ("Sono a cena con un gin in mano e discorsi accesi su calcio e giustizia.", "Faccio"),
+                ("Sto portando il cane fuori, ma mentalmente sono già in campo con i nanetti!", "Mame"),
+                ("Sto preparando il programma scout per il weekend con i miei ragazzi!", "Marti Casella")
+            ]
+        },
+        {
+            "domanda": "7. Il cetriolo del gruppo prende vita e vi chiede di seguirlo in una missione epica. Cosa fai?",
+            "opzioni": [
+                ("Lo seguo senza pensarci, ma prima organizzo le tappe su Excel.", "Marti Casella"),
+                ("Gli offro un gin tonic e chiedo se ha il biglietto per lo stadio.", "Faccio"),
+                ("Gli insegno a fare pressing alto e poi lo porto in campo con le allieve.", "Giulia"),
+                ("Chiedo se ci sono montagne lungo il tragitto, altrimenti passo.", "Cata"),
+                ("Lo porto da Mario e gli faccio raccontare barzellette.", "Mame"),
+                ("Lo intervisto in inglese inventato per il mio podcast mentale.", "Marti Russo"),
+                ("Lo iscrivo a un torneo e lo schiero mezzala.", "Cla"),
+                ("Gli faccio fare stretching e poi lo alleno con le bimbe!", "Babi"),
+                ("Controllo se ha fatto la cresima, poi si può partire.", "Ele")
+            ]
+        },
+        {
+            "domanda": "8. Sei trasformata in una bevanda magica. Quale sei?",
+            "opzioni": [
+                ("Un caffè triplo ristretto che fa svegliare anche i morti.", "Faccio"),
+                ("Un frullato energizzante con 12 ingredienti, tutti healthy.", "Marti Russo"),
+                ("Un gin lemon, elegante ma che spacca.", "Giulia"),
+                ("Un'acqua frizzante con una scorza di ironia.", "Mame"),
+                ("Un infuso rilassante che però ha anche la caffeina dentro, just in case.","Cla" ),
+                ("Un matcha latte instagrammabile ma con sostanza.", "Babi"),
+                ("Un tè caldo bevuto in tenda durante un'escursione alpina.", "Cata"),
+                ("Un succo ACE shakerato mentre scrivo la tesi sotto stress.","Ele" ),
+                ("Un integratore liquido super bilanciato con tabella Excel allegata.", "Marti Casella")
+            ]
+        },
+        {
+            "domanda": "9. Una sera le cocomere si trasformano tutte in animali da fattoria. Chi sei?",
+            "opzioni": [
+                ("Il gallo che canta troppo presto ma è già sveglio da ore con la lista della spesa.", "Ele"),
+                ("Il cane da pastore che cerca di tenere tutte in riga, anche se scappano.", "Babi"),
+                ("La capra che salta ovunque con energia infinita e urla in tre lingue.", "Marti Russo"),
+                ("L’asino che lavora in silenzio e ogni tanto scappa in Finlandia.", "Cata"),
+                ("La mucca zen che rumina in pace, ma attenzione se la fai arrabbiare.", "Marti Casella"),
+                ("Il coniglio che corre dappertutto con mille cose da fare ma sempre sorridente.", "Cla"),
+                ("La gallina che chioccia tutte ma a volte si nasconde nel pollaio.", "Giulia"),
+                ("Il maiale simpaticone che si rotola nella fanghiglia della vita con ironia.", "Mame"),
+                ("Il cavallo fiero che guida la carovana, criniera al vento.", "Faccio")
+            ]
+        },
+        {
+            "domanda": "10. Ti svegli e scopri di essere diventata... un oggetto da spogliatoio. Cosa sei?",
+            "opzioni": [
+                ("Lo speaker Bluetooth sempre a palla con canzoni motivazionali.", "Marti Russo"),
+                ("Il ghiaccio spray, sempre pronto nei momenti critici.", "Ele"),
+                ("Il pallone sgonfio che però sa ancora segnare.", "Cla"),
+                ("Il borsone perfettamente piegato con dentro tutto… e anche Excel stampato.", "Marti Casella"),
+                ("Il cronometro che detta i tempi, anche quelli della merenda.", "Babi"),
+                ("Il caffè che gira tra tutte prima della partita.", "Giulia"),
+                ("Il cerotto messo a caso che però funziona.", "Mame"),
+                ("La borraccia da montagna termica che non perde mai un colpo.", "Cata"),
+                ("La fascia da capitano sudata e sempre al posto giusto.", "Faccio")
+            ]
+        },
+        {
+            "domanda": "11. Un giorno scopri che tutte le cocomere hanno dei superpoteri. Qual è il tuo?",
+            "opzioni": [
+                ("Teletrasporto istantaneo per arrivare sempre in tempo alla partita, ma solo se c'è il gin.", "Faccio"),
+                ("Super velocità per fare 100 cose in 10 minuti, ma spesso inciampo per troppa energia.", "Mame"),
+                ("Invocare l'energia della montagna per fare lunghe escursioni, anche sotto la pioggia.", "Cata"),
+                ("Lanciare un pallone da calcio in modo così preciso che tutte le compagne segnano.", "Babi"),
+                ("Controllare il tempo e farlo sempre perfetto per una partita all'aperto.", "Marti Casella"),
+                ("Prevedere ogni mossa dell'avversario, anticipando ogni passaggio.", "Cla"),
+                ("Creare la magia del caffè, che fa passare ogni momento difficile.", "Giulia"),
+                ("Moltiplicare il tempo, così posso fare tutto senza stress.", "Ele"),
+                ("Parlare tutte le lingue del mondo… e anche inventarne di nuove!", "Marti Russo")
+            ]
+        },
+        {
+            "domanda": "12. Se le cocomere fossero un piatto tipico, cosa sareste?",
+            "opzioni": [
+                ("Una pizza margherita, semplice ma con la perfezione di un impasto fatto a mano.", "Faccio"),
+                ("Una pasta alla carbonara, bella sostanziosa ma anche super divertente.", "Babi"),
+                ("Un hamburger con mille ingredienti che non ti aspetti, ma alla fine è il migliore.", "Marti Russo"),
+                ("Un risotto ai funghi che sa di montagna e di tramonto.", "Cata"),
+                ("Un gelato artigianale, sempre fresco e pronto a farti sorridere.", "Ele"),
+                ("Un piatto di sushi elegante ma che ti sorprende con la sua freschezza.", "Giulia"),
+                ("Un tiramisù con mille strati, ognuno con una sorpresa.", "Marti Casella"),
+                ("Un’insalata mista con tutto il possibile, ma con un dressing segreto che cambia ogni volta.", "Cla"),
+                ("Un smoothie verde, sano, ma che ti dà la carica per tutta la giornata.", "Mame")
+            ]
+        },
+        {
+            "domanda": "13. La cocomera si trova in un’isola deserta, cosa porta con sé per sopravvivere?",
+            "opzioni": [
+                ("Un cagnolino, così non sarò mai sola!", "Mame"),
+                ("Un taccuino per scrivere tutto ciò che mi passa per la testa e motivarmi.","Cla" ),
+                ("Un kit da montagna per rifugi e fare trekking!", "Giulia"),
+                ("Una macchina fotografica per immortalare ogni momento, perché la vita è bella.", "Marti Russo"),
+                ("Un libro per studiare anche lì!", "Cata"),
+                ("Un cucchiaio gigante per scavare e cercare caffè ovunque.", "Faccio"),
+                ("Un karaoke portatile per non perdere mai la voglia di cantare.", "Babi"),
+                ("Un pallone da calcio, ovviamente, per fare partitelle sotto il sole.", "Ele"),
+                ("Una radio per sentire sempre la musica giusta in ogni momento.", "Marti Casella")
+            ]
+        },
+        {
+            "domanda": "14. Se la cocomera fosse una danza, quale sarebbe?",
+            "opzioni": [
+                ("La salsa, perché so come comandare il ritmo!", "Faccio"),
+                ("Il rock'n'roll, sempre energica ma pronta a improvvisare.", "Marti Russo"),
+                ("Una danza del ventre, sempre agile e pronta a sorprendere.", "Cata"),
+                ("Il balletto, che richiede precisione, ma c'è sempre spazio per la creatività.", "Giulia"),
+                ("La breakdance, con acrobazie e tanto divertimento.", "Ele"),
+                ("Il tango, perché so come coniugare passione e precisione.", "Cla"),
+                ("Un passo di danza folk che unisce tutti in un abbraccio di gioia.", "Babi"),
+                ("La danza moderna, sempre un passo avanti rispetto agli altri.", "Mame"),
+                ("Una danza tribale, che unisce corpo e anima, ma con molta energia!", "Marti Casella")
+            ]
+        },
+        {
+            "domanda": "15. Immagina di poter scrivere una lettera alle tue amiche cocomere, cosa ci scriveresti?",
+            "opzioni": [
+                ("Vi voglio bene più di quanto possiate immaginare, grazie per essere sempre le mie compagne di avventure!", "Faccio"),
+                ("Siamo una squadra unica, e sono grata di far parte di un gruppo che mi fa sentire così amata e sostenuta.", "Marti Russo"),
+                ("Ogni momento insieme è un regalo, e non vedo l'ora di vivere ancora tante esperienze con voi, cocomere!", "Cata"),
+                ("Anche quando le cose sono difficili, voi mi fate sempre sentire forte e in grado di superare tutto.", "Giulia"),
+                ("Vi ringrazio per esserci sempre, per supportarmi e per rendere ogni giorno migliore con la vostra dolcezza.", "Ele"),
+                ("Con tutte voi ho imparato a crescere, a sorridere anche nei momenti più difficili. Siete uniche!", "Babi"),
+                ("Non c'è nulla che non riuscirei a fare con voi al mio fianco, mi fate sentire che insieme possiamo conquistare il mondo.", "Cla"),
+                ("Ogni risata, ogni abbraccio, ogni sguardo ci rende più forti, e non potrei chiedere niente di meglio che essere insieme a voi.", "Mame"),
+                ("Siete il mio sostegno in ogni momento e vi voglio tanto bene. Grazie per essere le cocomere che rendono ogni giorno speciale.", "Marti Casella")
+            ]
+        }
+    ]
+
+    for d in domande_cocomere:
+        st.markdown(f"### {d['domanda']}")
+        risposta = st.radio("", [opt[0] for opt in d["opzioni"]], key=d["domanda"])
+        for testo, cocomera in d["opzioni"]:
+            if risposta == testo:
+                punteggi_cocomere[cocomera] += 1
+
+    if st.button("🏆 Scopri chi sei!"):
+        cocomera = max(punteggi_cocomere, key=punteggi_cocomere.get)
+
+        descrizioni = {
+            "Faccio": "Sei la leader del gruppo, quella che sa sempre cosa fare e come fare! Con la tua forza e determinazione, sei il punto di riferimento per tutte le cocomere. Non c'è mai un momento noioso quando sei in giro: sei sempre pronta a comandare con eleganza e a fare il tifo per la tua squadra, dentro e fuori dal campo!",
+            
+            "Babi": "Sei la dolcezza incarnata, ma anche una persona che sa quando essere decisa e tenere testa a chiunque! Il tuo cuore grande ti fa essere il supporto migliore per le tue amiche, e il tuo spirito generoso e il tuo amore per la squadra non passano mai inosservati. Ogni volta che ti vediamo in campo, siamo sicure che non ci deluderai mai!",
+            
+            "Cla": "Il tuo spirito sportivo ti rendono una cocomera fondamentale! Ogni tua mossa è carica di determinazione, ma non dimentichi mai di essere gentile e pronta ad aiutare le altre. Sei il mix perfetto tra cervello e forza fisica, e la tua energia ci contagia tutte!",
+            
+            "Mame": "La tua dolcezza è infinita, ma anche il tuo spirito ironico ci fa sempre ridere! Non ti lasci mai abbattere dalle difficoltà, e con la tua battuta pronta e la tua gentilezza, fai sorridere tutti. Anche se ti ferma una tallonite, il tuo amore per le cocomere e per la vita è indomabile!",
+            
+            "Marti Russo": "Sei l'energia fatta persona, sempre pronta a spronare tutti e a dare il massimo in ogni situazione. La tua energia frizzante è contagiosa e rende ogni momento insieme indimenticabile. E anche se parli in un misto di italiano e inglese, ti vogliamo bene proprio per come sei!",
+            
+            "Marti Casella": "Sei la persona che non ha paura di prendere in mano la situazione. Che tu stia giocando in porta o facendo la capo scout, ci puoi sempre contare. La tua dolcezza è accompagnata da una determinazione feroce e una voglia di fare che non ti lascia mai. E ci senti sempre, con i tuoi occhi attenti e il tuo cuore grande!",
+            
+            "Cata": "Anche a distanza, riesci a fare sentire la tua presenza. La tua energia e la tua passione per il calcio sono inarrestabili, e non importa dove ti trovi, la tua forza e il tuo entusiasmo illuminano sempre la nostra squadra. Sei la cocomera che riesce a vivere mille esperienze in un solo giorno!",
+            
+            "Ele": "La tua dedizione e il tuo impegno non hanno limiti! Sei una cocomera che sa cosa significa supportare e amare il gruppo, sempre pronta a fare il tifo, anche nei momenti più difficili. La tua dolcezza e il tuo spirito scout rendono ogni momento speciale, e non vediamo l'ora di averti di nuovo in campo!",
+            
+            "Giulia": "Sei quella che riesce sempre a farci ridere, anche nei momenti più tesi. La tua energia è unica e, nonostante le tue insicurezze, hai un cuore enorme che batte per le tue cocomere. Ti butti in ogni cosa con passione, sia che si tratti di calcio che di chitarra, sempre pronta a fare il tifo per tutte noi. La tua dolcezza e il tuo spirito creativo rendono ogni momento con te speciale!"
+
+        }
+
+
+        st.markdown(f"<h2 style='text-align: center;'>🥳 Sei {cocomera}! 🥳</h2>", unsafe_allow_html=True)
+
+        # Emojis e testuale grafico
+        st.markdown("""
+            <div style='font-size: 2em; text-align: center;'>🎉🎉🎉</div>
+        """, unsafe_allow_html=True)
+
+        st.markdown(f"<div style='padding: 1rem; background-color: #e6f2ff; border-left: 5px solid #001f3f; font-size: 1.2em;'>{descrizioni[cocomera]}</div>", unsafe_allow_html=True)
+
+        # Anima la celebrazione
+        st.balloons()
+
+        # Pulsante per tornare alla home
+        st.button("↩️ Torna alla home", on_click=torna_home)
