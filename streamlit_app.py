@@ -1387,7 +1387,7 @@ elif st.session_state.pagina == "quiz_canzoni":
             if risposta == testo:
                 punteggi_canzoni[canzone] += 1
 
-    if st.button("🏆 Scopri chi sei!"):
+    if st.button("🏆 Scopri qual è la tua canzone!"):
         canzone = max(punteggi_canzoni, key=punteggi_canzoni.get)
 
         descrizioni = {
@@ -1421,7 +1421,7 @@ elif st.session_state.pagina == "quiz_canzoni":
  
  
         # Riproduci la musica della canzone
-        st.audio(canzoni_audio[canzone], format='audio/mp3')
+        #st.audio(canzoni_audio[canzone], format='audio/mp3')
 
 
         # Emojis e testuale grafico
