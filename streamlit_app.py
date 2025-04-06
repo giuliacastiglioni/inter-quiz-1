@@ -22,6 +22,12 @@ def vai_al_quiz_ruoli():
     st.session_state.pagina = "quiz_ruoli"
     st.session_state.caricamento = False
 
+def vai_al_quiz_sport():
+    st.session_state.caricamento = True
+    time.sleep(1.5)
+    st.session_state.pagina = "quiz_sport"
+    st.session_state.caricamento = False
+
 def vai_al_quiz_piloti():
     st.session_state.caricamento = True
     time.sleep(1.5)
@@ -99,6 +105,10 @@ if st.session_state.pagina == "home":
     if st.button("Quale ruolo calcistico sei?    👉"):
         with st.spinner("Caricamento quiz... 🧐"):
             vai_al_quiz_ruoli()
+
+    if st.button("Quale sport sei?    👉"):
+        with st.spinner("Caricamento quiz... 🧐"):
+            vai_al_quiz_sport()
 
     if st.button("Quale pilota di Formula 1 sei?    👉"):
         with st.spinner("Caricamento quiz... 🧐"):
@@ -1962,7 +1972,7 @@ elif st.session_state.pagina == "quiz_ruoli":
             if risposta == testo:
                 punteggi_ruoli[ruolo] += 1
 
-    if st.button("🏆 Scopri chi sei!"):
+    if st.button("🏆 Scopri chiche ruolo sei!"):
         ruolo = max(punteggi_ruoli, key=punteggi_ruoli.get)
 
         descrizioni = {
@@ -2001,6 +2011,207 @@ elif st.session_state.pagina == "quiz_ruoli":
         # GIF esultanza
 
         gif_url = "https://www.bing.com/th/id/OGC.05019b335e99294f4af04540ad238251?pid=1.7&rurl=https%3a%2f%2fwww.lfootball.it%2fwp-content%2fuploads%2f2019%2f11%2f10-CRAZY-GOAL-CELEBRATIONS-IN-WOMEN_S-FOOTBALL-2m18.1s-2m21.4s-3chL-PH0dUc-2.gif&ehk=t%2b3xsqrH%2bLPe3axLmgX5TWenUIUZQC6WA9CjgEjcqxc%3d"
+        st.image(gif_url, caption="YAY!!!", use_container_width=True)
+
+        # Anima la celebrazione
+        st.balloons()
+
+        # Pulsante per tornare alla home
+        st.button("↩️ Torna alla home", on_click=torna_home)
+
+# Pagina QUIZ SPORT
+elif st.session_state.pagina == "quiz_sport":
+    # Inserisci qui il codice del quiz sull'Inter che hai già scritto
+    st.markdown("<h1 style='text-align: center; color: #001f3f;'> ""⚽ Quale sport sei? </h1>", unsafe_allow_html=True)
+
+    punteggi_sport = {
+        "Calcio": 0,
+        "Formula 1": 0,
+        "Tennis": 0,
+        "Pallavolo": 0,
+        "Basket": 0,
+        "Atletica leggera": 0,
+    }
+
+    domande_sport = [
+        {
+            "domanda": "Se ti trovassi nel bel mezzo di una tempesta, cosa faresti per restare concentrato?",
+            "opzioni": [
+                ("Mi farei largo tra le onde, accelerando con una precisione millimetrica.", "Formula 1"),
+                ("Cercerei di anticipare ogni mossa dell’aria, come se sapessi già dove andrà il vento.", "Tennis"),
+                ("Cercherei di mantenermi calmo, contando i secondi come se fossi in una gara.", "Atletica leggera"),
+                ("Mi sforzerei di costruire un equilibrio tra tutte le forze in gioco, muovendomi con determinazione.", "Pallavolo"),
+                ("Mi concentrerei su un solo obiettivo e farei in modo di raggiungerlo, indipendentemente dagli altri.", "Basket"),
+                ("Tenterei di non perdere la visione d’insieme, reagendo ogni volta che il quadro cambia.", "Calcio")
+            ]
+        },
+        {
+            "domanda": "Cosa faresti se dovessi affrontare un compito che sembra impossibile?",
+            "opzioni": [
+                ("Mi concentrerei solo sull’aspetto tecnico, senza farmi distrarre da nient’altro.", "Formula 1"),
+                ("Cercherei di giocare d’astuzia, prevedendo ogni possibile sviluppo.", "Tennis"),
+                ("Sfrutterei il supporto di chi mi sta intorno, ma con il mio marchio di individualità.", "Basket"),
+                ("Mi sforzerei di creare sincronia, dove tutti i movimenti si allineano perfettamente.", "Pallavolo"),
+                ("Mi focalizzerei sul dettaglio, preparandomi a una lunga rincorsa verso la meta.", "Atletica leggera"),
+                ("Mi rimboccherei le maniche e cercherei il momento giusto per lanciare l’attacco decisivo.", "Calcio")
+            ]
+        },
+        {
+            "domanda": "Quale sarebbe il tuo atteggiamento se qualcuno ti sfidasse a risolvere una situazione complicata?",
+            "opzioni": [
+                ("Affronterei la sfida con il massimo delle energie, pronto a ripartire al minimo errore.", "Formula 1"),
+                ("Farei leva sulla mia esperienza, cercando di anticipare ogni possibile mossa.", "Tennis"),
+                ("Analizzerei la situazione con calma, senza mai fermarmi anche quando il gioco si fa duro.", "Atletica leggera"),
+                ("Accetterei la sfida, ma solo se posso coordinarla con gli altri, altrimenti non mi piace rischiare.", "Pallavolo"),
+                ("Trovarei la forza di superare il limite, saltando gli ostacoli con facilità.", "Basket"),
+                ("Cercherei di adattarmi alla situazione, spingendo la mia squadra verso l’obiettivo.", "Calcio")
+            ]
+        },
+        {
+            "domanda": "Come reagiresti se dovessi affrontare un imprevisto mentre sei al centro dell’azione?",
+            "opzioni": [
+                ("Non mi fermerei neanche un secondo, restando concentrato sulla mia traiettoria.", "Formula 1"),
+                ("Troverei il modo di non farmi sorprendere, concentrandomi sulla prossima mossa.", "Tennis"),
+                ("Accetterei la sfida, ma sempre con la consapevolezza che la velocità è la chiave.", "Atletica leggera"),
+                ("Cercherei di fare la cosa giusta al momento giusto, come se fosse già stato programmato.", "Pallavolo"),
+                ("Mi adatterei velocemente alla situazione, facendo leva sul gioco di squadra.", "Basket"),
+                ("Troverei un modo per aggirare l’ostacolo e continuare senza perdere il ritmo.", "Calcio")
+            ]
+        },
+        {
+            "domanda": "Cosa faresti per far sembrare che hai tutto sotto controllo, quando in realtà non lo è?",
+            "opzioni": [
+                ("Vincerei ogni curva, senza mai mostrare segni di indecisione.", "Formula 1"),
+                ("Farei un colpo inaspettato che lascia tutti a bocca aperta, ma mi sento solo metà preparato.", "Tennis"),
+                ("Mi farei notare per la mia calma, ma nel frattempo corrierei come un pazzo.", "Atletica leggera"),
+                ("Mi concentrerei sulla precisione dei movimenti, senza mai sbagliare un colpo.", "Pallavolo"),
+                ("Farei il possibile per nascondere le difficoltà, puntando sulla squadra.", "Basket"),
+                ("Troverei il momento giusto per passare e fare il lavoro sporco, ma sembrerà che sia tutto perfetto.", "Calcio")
+            ]
+        },
+        {
+            "domanda": "Se dovessi descrivere la tua energia in una sola parola, quale sarebbe?",
+            "opzioni": [
+                ("Frenetica e precisa, come un motore che gira ad alta velocità.", "Formula 1"),
+                ("Indomita e versatile, come una racchetta che colpisce ogni palla con forza.", "Tennis"),
+                ("Inarrestabile, sempre alla ricerca di un nuovo traguardo da conquistare.", "Atletica leggera"),
+                ("Impeccabile, ogni movimento è calcolato, ma la forza è nella squadra.", "Pallavolo"),
+                ("Elettrica e viscerale, pronta a saltare verso l’obiettivo più lontano.", "Basket"),
+                ("Controllata, ma capace di esplodere quando arriva il momento giusto.", "Calcio")
+            ]
+        },
+        {
+            "domanda": "Se fossi in un ambiente estremamente competitivo, come reagiresti?",
+            "opzioni": [
+                ("Mi concentrerei sul miglioramento continuo, come un motore che non si ferma mai.", "Formula 1"),
+                ("Mi faresti notare, non con la forza, ma con la precisione.", "Tennis"),
+                ("Sfiderai chiunque, ma con la calma di sapere che la mia squadra è sempre con me.", "Pallavolo"),
+                ("Sfrutterei ogni mossa con velocità e determinazione, cercando di arrivare primo.", "Atletica leggera"),
+                ("Cercherei di controllare il ritmo, ma anche di lasciare che gli altri si distraggano.", "Basket"),
+                ("Ogni decisione sarebbe presa con una squadra unita, ma sono sempre pronto a lanciare il mio colpo finale.", "Calcio")
+            ]
+        },
+        {
+            "domanda": "Immagina di dover lavorare sotto pressione, cosa faresti?",
+            "opzioni": [
+                ("Non esiterei un attimo: la velocità è tutto, non c’è spazio per errori.", "Formula 1"),
+                ("Mi preparerei al momento decisivo, il colpo perfetto che non lascia spazio a nessuna risposta.", "Tennis"),
+                ("Mentre tutti sono concentrati, mi trovo al centro del gruppo, pronto a dare il mio massimo.", "Pallavolo"),
+                ("Mi focalizzerei sul controllo, la velocità, ma senza perdere mai la lucidità.", "Atletica leggera"),
+                ("Guarderei gli altri da vicino, pronto a cambiare direzione al volo.", "Basket"),
+                ("Manterrei il controllo della situazione, con un obiettivo sempre chiaro: arrivare in porta.", "Calcio")
+            ]
+        },
+        {
+            "domanda": "Immagina di avere un'invenzione che può cambiare il mondo. Qual è il primo passo che faresti?",
+            "opzioni": [
+                ("Accellero il processo, mettendo a punto ogni dettaglio per raggiungere la massima velocità.", "Formula 1"),
+                ("Voglio che tutto sia perfetto, passo dopo passo, e ogni movimento è fatto con una precisione millimetrica.", "Tennis"),
+                ("Inizio con una reazione a catena, dove ogni mossa ha il potenziale di cambiare il corso delle cose.", "Pallavolo"),
+                ("Mi butto nell'ignoto, prendo un rischio calcolato e vedo dove mi porta.", "Atletica leggera"),
+                ("Creo una rete di alleanze, ma sono sempre pronto a saltare in azione se qualcuno cerca di interromperla.", "Basket"),
+                ("Aggiusto ogni pezzo per farlo incastrare perfettamente, costruendo il mio piano con un'attenzione maniacale ai dettagli.", "Calcio")
+            ]
+        },
+        {
+            "domanda": "Cosa faresti se dovessi affrontare un esercito di robot per salvare un'isola deserta?",
+            "opzioni": [
+                ("Sfreccerei tra le macchine, sfruttando la tecnologia per farle esplodere in una serie di manovre ad alta velocità.", "Formula 1"),
+                ("Mi concentro, cercando di colpire ogni singolo robot con precisione, evitando ogni errore.", "Tennis"),
+                ("Sfrutterei la strategia di squadra: ognuno avanza nella sua zona, e io spero di fare il colpo decisivo!", "Pallavolo"),
+                ("Corro come un treno, saltando ogni ostacolo e battere la velocità della luce.", "Atletica leggera"),
+                ("Lancio il pallone in ogni angolo per creare confusione tra di loro, mentre attendo il momento giusto per colpire!", "Basket"),
+                ("Mi metto a dribblare i robot, uno dopo l'altro, saltando e cercando di ingannarli!", "Calcio")
+            ]
+        },
+        {
+            "domanda": "Immagina di essere in una giungla e di dover attraversare un fiume pieno di coccodrilli. Come lo faresti?",
+            "opzioni": [
+                ("Corro sulla superficie dell'acqua, saltando con una velocità folle, come se stessi in pista.", "Formula 1"),
+                ("Concentro tutta la mia energia e mi tuffo perfettamente tra le rocce, come un attacco preciso.", "Tennis"),
+                ("Utilizzo una rete invisibile di salvataggi, come una mossa di squadra, che mi consente di attraversare il fiume senza cadere.", "Pallavolo"),
+                ("Salto da una roccia all’altra, utilizzando il mio massimo potenziale per affrontare ogni ostacolo.", "Atletica leggera"),
+                ("Lancio palle a grande distanza per distrarre i coccodrilli, mentre mi avvicino al mio obiettivo.", "Basket"),
+                ("Cercando di prevedere ogni movimento dei coccodrilli, mi faccio strada con rapidità e strategia.", "Calcio")
+            ]
+        },
+        {
+            "domanda": "Se fossi intrappolato in una stanza con 100 porte, come usciresti?",
+            "opzioni": [
+                ("Accelerando a tutta velocità, apro la porta giusta con la massima forza e precisione.", "Formula 1"),
+                ("Trovo una porta che sembra un miraggio, ma la apro con la precisione di un servizio al centro del campo.", "Tennis"),
+                ("Cerco di lavorare insieme a chi è con me, come una squadra, per trovare l’uscita.", "Pallavolo"),
+                ("Corro per la stanza, testando ogni porta e misurando la forza di ogni uscita.", "Atletica leggera"),
+                ("Lancio una palla verso la porta giusta e aspetto che le altre si distraggano.", "Basket"),
+                ("Osservo attentamente ogni porta e la apro con l’agilità di un attaccante pronto a segnare.", "Calcio")
+            ]
+        },
+        {
+            "domanda": "Se dovessi partecipare a una maratona tra le stelle, come ti prepareresti?",
+            "opzioni": [
+                ("Inizierò a correre più velocemente, superando la gravità e sfruttando ogni vantaggio che la velocità mi dà.", "Formula 1"),
+                ("Mi concentro sulla tecnica, facendo ogni passo con una precisione che supera le leggi della fisica.", "Tennis"),
+                ("Mentre corro, mi assicuro che la squadra sia sempre sincronizzata, così che possiamo vincere insieme.", "Pallavolo"),
+                ("Corro senza fermarmi mai, sfidando ogni limite e ogni ostacolo che mi si presenta.", "Atletica leggera"),
+                ("Scatto in avanti, ma sono sempre pronto a fermarmi e cambiare direzione per cogliere l'opportunità.", "Basket"),
+                ("Mi adatto all'ambiente spaziale, sfruttando ogni mossa per prendere il miglior angolo di attacco.", "Calcio")
+            ]
+        }                
+    ]
+
+    for d in domande_sport:
+        st.markdown(f"### {d['domanda']}")
+        risposta = st.radio("", [opt[0] for opt in d["opzioni"]], key=d["domanda"])
+        for testo, sport in d["opzioni"]:
+            if risposta == testo:
+                punteggi_sport[sport] += 1
+
+    if st.button("🏆 Scopri che sport sei!"):
+        sport = max(punteggi_sport, key=punteggi_sport.get)
+
+        descrizioni = {
+            "Formula 1": "Sei la persona che ama l'adrenalina, la velocità e l'innovazione. Nella vita, affronti ogni sfida come un pilota di Formula 1: velocità, precisione e un po' di rischio. Non hai paura di andare oltre i limiti e spingere ogni situazione al massimo, ma lo fai sempre con la mente lucida e pronta a cambiare rotta quando necessario. Sei un leader che sa come dominare la pista e affrontare l'incertezza con stile.",
+            "Calcio": "Sei una persona che si adatta facilmente ai cambiamenti e sa come leggere la situazione per prendere la decisione giusta al momento giusto. Proprio come in una partita di calcio, sei bravo a rispondere agli imprevisti con intelligenza e agilità. Sei un leader naturale, che sa come motivare gli altri e lavorare per un obiettivo comune. La tua determinazione e la tua capacità di giocare in squadra ti rendono un partner indispensabile nella vita.",
+            "Tennis": "Sei un perfezionista che affronta la vita con la stessa precisione e concentrazione di un tennista. Ogni movimento che fai è ponderato, e sei sempre pronto a rispondere a ogni sfida con calma e determinazione. Le tue capacità strategiche sono insuperabili, e sai come mantenere il controllo anche nei momenti più tesi. La tua concentrazione ti permette di superare qualsiasi ostacolo, proprio come in un match decisivo.",
+            "Pallavolo": "Sei un team player nato, sempre pronto a collaborare con gli altri per raggiungere un obiettivo comune. Nella vita, ti piace lavorare con gli altri, coordinarti e supportare i tuoi compagni di squadra. Hai un talento speciale per unire le forze e ottenere risultati che nessuno avrebbe potuto raggiungere da solo. La tua energia contagiosa e il tuo spirito di squadra ti rendono una persona affidabile e amata da tutti.",
+            "Basket": "Sei una persona che sa come adattarsi a ogni situazione, proprio come un giocatore di basket sa quando passare, quando tirare e quando difendere. La tua flessibilità mentale e la tua capacità di cambiare direzione ti permettono di affrontare qualsiasi sfida con creatività. Sei un problem solver naturale e ti piace pensare fuori dagli schemi. La tua energia e il tuo entusiasmo sono contagiosi, e sai sempre come sollevare gli altri nei momenti di difficoltà.",
+            "Atletica leggera": "Sei una persona che vive per il movimento e la sfida fisica. Affronti la vita come una corsa: preparazione, resistenza e una spinta continua per superare te stesso. Non ti arrendi mai, anche quando il percorso è difficile, e sei sempre pronto a metterti alla prova. La tua forza interiore è la tua arma segreta, e con determinazione e disciplina, raggiungi sempre il traguardo che ti sei prefissato.",
+        }
+
+        st.markdown(f"<h2 style='text-align: center;'>🥳 Sei {sport}! 🥳</h2>", unsafe_allow_html=True)
+
+        # Emojis e testuale grafico
+        st.markdown("""
+            <div style='font-size: 2em; text-align: center;'>🎉🎉🎉</div>
+        """, unsafe_allow_html=True)
+
+
+        # Descrizione giocatore
+        st.markdown(f"<div style='padding: 1rem; background-color: #e6f2ff; border-left: 5px solid #001f3f; font-size: 1.2em;'>{descrizioni[sport]}</div>", unsafe_allow_html=True)
+        
+        # GIF esultanza
+
+        gif_url = "https://www.bing.com/th/id/OGC.ca93c52c5d5e3ed88274cb6e3222d553?pid=1.7&rurl=https%3a%2f%2fmedia.giphy.com%2fmedia%2f3o6Ztqh4JSlVqi2Z20%2fgiphy.gif&ehk=wSij6bEeaoh8UGpG7zqvDWSZ7ndXfuVggrcaNUFG0%2bI%3d"
         st.image(gif_url, caption="YAY!!!", use_container_width=True)
 
         # Anima la celebrazione
