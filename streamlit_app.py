@@ -1,7 +1,7 @@
 import streamlit as st
 import time
 
-st.set_page_config(page_title="**Quiz!!!**", page_icon="⚽", layout="centered")
+st.set_page_config(page_title="Quiz!!!", page_icon="⚽", layout="centered")
 
 # Imposta la sessione per tenere traccia della pagina corrente
 if "pagina" not in st.session_state:
