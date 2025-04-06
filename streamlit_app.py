@@ -16,6 +16,12 @@ def vai_al_quiz_inter():
     st.session_state.pagina = "quiz_inter"
     st.session_state.caricamento = False
 
+def vai_al_quiz_piloti():
+    st.session_state.caricamento = True
+    time.sleep(1.5)
+    st.session_state.pagina = "quiz_piloti"
+    st.session_state.caricamento = False
+
 def vai_al_quiz_allenatori():
     st.session_state.caricamento = True
     time.sleep(1.5)
@@ -52,6 +58,10 @@ if st.session_state.pagina == "home":
     if st.button("Quale calciatore dell'Inter sei?    👉"):
         with st.spinner("Caricamento quiz... 🧐"):
             vai_al_quiz_inter()
+
+    if st.button("Quale pilota di Formula 1 sei?    👉"):
+        with st.spinner("Caricamento quiz... 🧐"):
+            vai_al_quiz_piloti()
 
     if st.button("Quale allenatore del VJ Open Femminile sei?    👉"):
         with st.spinner("Caricamento quiz... 🧐"):
@@ -313,6 +323,235 @@ elif st.session_state.pagina == "quiz_inter":
         st.button("↩️ Torna alla home", on_click=torna_home)
     
     pass  # Mantieni il codice già esistente per il quiz dell'Inter
+# Pagina QUIZ PILOTI
+elif st.session_state.pagina == "quiz_piloti":
+    # Inserisci qui il codice del quiz sull'Inter che hai già scritto
+    st.markdown("<h1 style='text-align: center; color: #001f3f;'>⚫ Quale pilota di Formula 1 sei? 🔴 </h1>", unsafe_allow_html=True)
+
+    punteggi_piloti = {
+        "Verstappen": 0,
+        "Leclerc": 0,
+        "Norris": 0,
+        "Piastri": 0,
+        "Kimi Antonelli": 0,
+        "Alonso": 0,
+        "Hamilton": 0,
+        "Sainz": 0
+    }
+
+    domande_piloti = [
+        {
+            "domanda": "1. Sei in una serata con amici e ti chiedono di scegliere il karaoke. Qual è la tua mossa?",
+            "opzioni": [
+                ("Prendo il microfono senza pensarci due volte e faccio un'entrata trionfale!", "Verstappen"),
+                ("Mi prendo un momento per osservare e poi, quando tutti sono distratti, spacco con una canzone classica!", "Hamilton"),
+                ("Sto calmo all'inizio, ma quando arrivo sul palco do il massimo! Una performance da ricordare!", "Leclerc"),
+                ("Non sono sicuro, ma mi faccio influenzare dal gruppo. Se tutti si divertono, mi unisco!", "Sainz"),
+                ("Non sono il tipo che si lancia subito, ma se c'è una canzone che mi piace, la faccio mia!", "Norris"),
+                ("Mi prendo il mio tempo, e quando decido, vado a tutta birra. Nessuno si aspetta il mio gran finale!", "Piastri"),
+                ("Accetto la sfida, ma prima osservo gli altri. Mi piace tenere un basso profilo, poi arrivo!", "Kimi Antonelli"),
+                ("Se qualcuno canta una canzone epica, mi unisco immediatamente, non posso restare a guardare!", "Alonso")
+            ]
+        },
+
+        {
+            "domanda": "2. Immagina di avere una giornata libera e puoi fare qualsiasi cosa. Cosa scegli?",
+            "opzioni": [
+                ("Esploro nuove città, mi piace scoprire luoghi e assaporare la cultura locale!", "Leclerc"),
+                ("Mi lancio in una sfida sportiva, magari una gara di go-kart o una partita di tennis!", "Verstappen"),
+                ("Mi rilasso e passo una giornata tranquilla, magari con un libro e una buona tazza di tè.", "Norris"),
+                ("Lavoro su qualcosa di nuovo, ma lo faccio sempre con passione e concentrazione.", "Piastri"),
+                ("Mi concedo una giornata di puro relax con gli amici, un buon film e magari una pizza!", "Sainz"),
+                ("Preferisco stare in compagnia, fare quattro chiacchiere e godermi un buon pranzo.", "Alonso"),
+                ("Faccio un'escursione in montagna per staccare la mente e ricaricare le energie.", "Kimi Antonelli"),
+                ("Vado a fare un giro in bici per la città, mi piace sentirsi libero e in movimento.", "Hamilton")
+            ]
+        },
+
+        {
+            "domanda": "3. Sei al supermercato, ma il carrello è già pieno e non sai cosa comprare di più. Qual è la tua scelta finale?",
+            "opzioni": [
+                ("Non c'è alcun dubbio! Più snack per tutti, dobbiamo fare scorta!", "Verstappen"),
+                ("Scelgo con calma, ma sempre con la qualità. Frutta, verdura e qualche dolcetto, non si sa mai!", "Leclerc"),
+                ("Vado sul sicuro: prodotti pratici e veloci, niente di troppo complicato!", "Norris"),
+                ("Metto qualcosa di esotico, qualcosa che non avrei mai pensato, ma che potrebbe sorprendere.", "Piastri"),
+                ("Penso ai miei amici e compro sempre qualcosa che possa fare felici tutti!", "Sainz"),
+                ("Prendo solo ciò che mi serve per una settimana comoda, niente sprechi!", "Hamilton"),
+                ("Cerco qualcosa di diverso, un po' di cultura gastronomica in più!", "Alonso"),
+                ("Mi faccio coinvolgere dall'atmosfera e prendo qualche snack extra per fare festa!", "Kimi Antonelli")
+            ]
+        },
+
+        {
+            "domanda": "4. Se potessi inventare una nuova regola per il mondo, quale sarebbe?",
+            "opzioni": [
+                ("Ogni settimana deve esserci un giorno in cui tutte le scuole e i lavori sono chiusi per una giornata di relax!", "Hamilton"),
+                ("Ogni viaggio deve essere un'avventura, quindi bisogna fermarsi sempre a fare una foto in ogni angolo.", "Leclerc"),
+                ("Una giornata di pura creatività, dove tutti devono inventare una nuova invenzione o gioco ogni anno!", "Verstappen"),
+                ("Voglio un mondo in cui le sfide siano sempre giuste e ogni individuo possa esprimere la sua unicità.", "Piastri"),
+                ("Farei in modo che ogni mattina inizi con un'ora di esercizio fisico per tutti, per cominciare la giornata al massimo!", "Norris"),
+                ("Ogni tanto dobbiamo fermarci e riflettere su quanto siamo fortunati. Una giornata di gratitudine ogni mese.", "Sainz"),
+                ("Che nessuna gara sia mai decisa prima del tempo. Tutto può cambiare in un attimo!", "Alonso"),
+                ("La musica deve essere il cuore di ogni incontro. Dobbiamo sempre suonare un po' di musica!", "Kimi Antonelli")
+            ]
+        },
+
+        {
+            "domanda": "5. Se fossi un supereroe, quale sarebbe il tuo superpotere?",
+            "opzioni": [
+                ("La capacità di volare e andare ovunque voglio in un batter d'occhio!", "Verstappen"),
+                ("La supervelocità! Ogni cosa che faccio deve essere fatta velocemente e con stile.", "Hamilton"),
+                ("L'invisibilità. A volte è meglio stare dietro le quinte e osservare senza essere visto.", "Norris"),
+                ("Il superdono! Aiutare gli altri è il mio superpotere segreto.", "Sainz"),
+                ("La telecinesi, in modo da poter fare mille cose contemporaneamente!", "Leclerc"),
+                ("La superintelligenza, per risolvere qualsiasi problema in un attimo.", "Piastri"),
+                ("Il potere di fermare il tempo, per potermi rilassare quando voglio.", "Alonso"),
+                ("La capacità di risolvere qualsiasi situazione con una risata!", "Kimi Antonelli")
+            ]
+        },
+        {
+            "domanda": "6. Immagina di essere in un film d'azione: quale sarebbe il tuo superpotere completamente inutile ma divertente?",
+            "opzioni": [
+                ("Il potere di apparire e scomparire ogni volta che qualcuno pronuncia il mio nome, tipo magico ma inutile!", "Verstappen"),
+                ("Essere sempre in grado di fare un'entrata trionfale, con tanto di effetti speciali, ma solo per entrare in un negozio!", "Leclerc"),
+                ("Controllare il traffico con il mio sguardo. Peccato che non mi serva mai, visto che mi piace sempre arrivare in ritardo!", "Hamilton"),
+                ("Il potere di creare una pila infinita di cuscini, così posso sempre addormentarmi in ogni situazione!", "Norris"),
+                ("Essere in grado di fare le pernacchie a distanza per distrarre chiunque, in qualsiasi momento!", "Piastri"),
+                ("La capacità di ordinare sempre il gelato sbagliato, ma continuare a mangiarlo con entusiasmo!", "Sainz"),
+                ("Il potere di far partire una canzone romantica ogni volta che faccio un passo, come se fossi in un musical!", "Kimi Antonelli"),
+                ("Fare apparire una pioggia di confetti ogni volta che dico una battuta, anche se nessuno la trova divertente!", "Alonso")
+            ]
+        },
+
+        {
+            "domanda": "7. Se potessi inventare un nuovo sport da praticare in pista, quale sarebbe?",
+            "opzioni": [
+                ("Gara di karaoke a 300 km/h, con un microfono gigante che ti fa cantare a tutto volume mentre corri!", "Verstappen"),
+                ("Competizione di salto con la corda in macchina, ma solo se la corda è fatta di spaghetti!", "Leclerc"),
+                ("Una corsa a chi riesce a mangiare più pizza mentre guida, e il premio è una pizza gigante!", "Hamilton"),
+                ("Un rally di go-kart in cui l'obiettivo è non ridere mentre gli altri piloti fanno battute", "Norris"),
+                ("Una sfida di velocità ma con uno scooter elettrico, perché perché no?", "Piastri"),
+                ("Fuga da una pioggia di popcorn giganti, e l'unico modo per vincere è non farsi travolgere!", "Sainz"),
+                ("Sfidarsi a chi riesce a fare più acrobazie in macchina mentre ascolta la musica disco!", "Kimi Antonelli"),
+                ("Una gara di velocità in cui, a ogni curva, la macchina cambia colore, ma nessuno sa perché!", "Alonso")
+            ]
+        },
+
+        {
+            "domanda": "8. Se ti trovassi in una stanza piena di cuscini, quale sarebbe la tua reazione?",
+            "opzioni": [
+                ("Mi tuffo subito dentro, perché un buon cuscino è la mia dimensione naturale!", "Verstappen"),
+                ("Mi trovo un angolino tranquillo e mi faccio un pisolino. Non c'è posto migliore per un relax veloce.", "Hamilton"),
+                ("Mi fingo un'ombra e inizio a fare capriole, giusto per vedere chi mi segue.", "Leclerc"),
+                ("Prendo un cuscino, faccio finta di essere un ninja e inizio a fare colpi di karate!", "Norris"),
+                ("Vedo una montagna di cuscini e la prima cosa che faccio è creare un fortino!", "Piastri"),
+                ("Lancio un cuscino come se fosse una palla da rugby, ma senza alcuna coordinazione!", "Sainz"),
+                ("Faccio una montagna di cuscini e poi prendo un selfie, perché è troppo fotogenico!", "Kimi Antonelli"),
+                ("Mi sdraio e mi faccio una mini sessione di meditazione, ma il cuscino diventa il mio miglior amico.", "Alonso")
+            ]
+        },
+
+        {
+            "domanda": "9. Se dovessi partecipare a un talent show, quale sarebbe la tua esibizione?",
+            "opzioni": [
+                ("Ballerei un tango super elegante, ma alla fine inciamperei su una scarpa!", "Verstappen"),
+                ("Mi esibisco in una performance di mimesi: imito un pilota di F1, ma ogni movimento è esagerato!", "Leclerc"),
+                ("Farei un monologo divertente dove parlo di come guidare con stile mentre bevo una tazza di tè.", "Hamilton"),
+                ("Canto una canzone pop a squarciagola, ma con un microfono che non funziona mai!", "Norris"),
+                ("Improvviso una performance da ballerino e la concludo con una coreografia strana e assurda!", "Piastri"),
+                ("Eseguo una danza ritmica con un pallone da calcio, cercando di non farlo cadere.", "Sainz"),
+                ("Mimerei le reazioni di un pilota durante una gara, aggiungendo dei colpi di scena esagerati.", "Kimi Antonelli"),
+                ("Racconterei un'epica storia di come ho vinto una gara, ma con tanto di effetti speciali e drammatizzazione!", "Alonso")
+            ]
+        },
+
+        {
+            "domanda": "10. Se dovessi scegliere il tuo 'superpotere' per affrontare la vita quotidiana, quale sarebbe?",
+            "opzioni": [
+                ("Il potere di dormire 10 ore in un minuto, così posso affrontare la giornata con la giusta energia.", "Verstappen"),
+                ("Il potere di avere sempre la risposta giusta quando qualcuno ti fa una domanda strana!", "Leclerc"),
+                ("Il potere di fare sparire tutto ciò che è in disordine, specialmente quando sono in ritardo!", "Hamilton"),
+                ("Il potere di fare il caffè perfetto, indipendentemente da dove mi trovo!", "Norris"),
+                ("Il potere di fare il doppio dei compiti in metà tempo, così posso passare più tempo a divertirmi!", "Piastri"),
+                ("Il potere di non sbagliare mai una freccia quando guido, senza mai farmi perdere!", "Sainz"),
+                ("Il potere di parlare con gli animali e chiedere loro consigli sulla vita!", "Kimi Antonelli"),
+                ("Il potere di teletrasportarmi in qualsiasi posto dove c'è una festa!", "Alonso")
+            ]
+        },
+        {
+            "domanda": "Se Giulia fosse una pit stop in una gara di F1, come sarebbe?",
+            "opzioni": [
+                ("Super veloce, tutto perfetto e con un tocco di precisione in ogni mossa!", "Leclerc"),
+                ("Un po' imprevedibile, ma comunque efficace, riesce sempre a sorprendere!", "Verstappen"),
+                ("Un pit stop pieno di energia positiva, con un sorriso che illumina tutto!", "Norris"),
+                ("Il pit stop più creativo di sempre, con qualche mossa fuori dal comune.", "Piastri"),
+                ("Elegante e preciso, anche sotto pressione, è sempre tutto sotto controllo.", "Hamilton"),
+                ("Rapido ma un po' misterioso, lascia tutti a chiedersi come abbia fatto.", "Kimi Antonelli"),
+                ("Un pit stop che sa adattarsi a qualsiasi situazione, sempre con determinazione.", "Sainz"),
+                ("Flessibile e reattiva, trova sempre la giusta strategia per rimettersi in pista!", "Alonso")
+            ]
+        }
+    ]
+
+    for d in domande_piloti:
+        st.markdown(f"### {d['domanda']}")
+        risposta = st.radio("", [opt[0] for opt in d["opzioni"]], key=d["domanda"])
+        for testo, pilota in d["opzioni"]:
+            if risposta == testo:
+                punteggi_piloti[pilota] += 1
+
+    if st.button("🏆 Scopri chi sei!"):
+        pilota = max(punteggi_piloti, key=punteggi_piloti.get)
+
+        descrizioni = {
+            "Verstappen": "Sei una persona determinata, che non si ferma mai davanti agli ostacoli. Hai una mentalità da vincente, sempre focalizzato sull'obiettivo, e ogni volta che scendi in campo dimostri che la tua concentrazione è imparagonabile.",
+            "Leclerc": "La tua velocità è sorprendente, proprio come quella di un pilota che ama superare i limiti. Sei un mix di talento naturale e passione inarrestabile, sempre pronto a dare il massimo, anche nelle sfide più difficili.",
+            "Norris": "Hai una personalità che conquista tutti! La tua energia è contagiosa e non hai paura di far vedere il tuo lato più simpatico. La tua freschezza e spontaneità ti rendono uno dei piloti più amati dal pubblico.",
+            "Piastri": "La tua calma e lucidità ti permettono di affrontare ogni situazione con estrema precisione. Sei pronto a raccogliere i frutti del tuo lavoro duro, e la tua costanza ti porterà sicuramente lontano.",
+            "Alonso": "Con una mentalità da veterano, sei un pilota che sa come sfruttare ogni occasione. Non ti arrendi mai e la tua esperienza è la chiave del tuo successo, anche nelle circostanze più difficili.",
+            "Sainz": "Con un mix perfetto di determinazione e agilità mentale, sei un pilota che sa sempre come adattarsi. La tua strategia è sempre sul pezzo, e sai fare la differenza quando è necessario.",
+            "Hamilton": "Eleganza, talento e una dedizione infinita. Sei un pilota che ha visto e vissuto ogni aspetto della Formula 1. La tua leadership e la capacità di ispirare gli altri sono una fonte di ammirazione per tutti.",
+            "Kimi Antonelli": "Sei giovane, ma con una personalità da veterano. Ti distingue un'energia dirompente e una capacità di restare concentrato anche nei momenti più critici. Il futuro della Formula 1 è sicuramente nelle tue mani!"
+        }
+
+
+        immagini = {
+            "Verstappen": "https://www.bing.com/th/id/OGC.46a021b71bbe33997086938daa81458d?pid=1.7&rurl=https%3a%2f%2fmedia.tenor.com%2fmEI0LWZRrr0AAAAC%2fverstappen-max-verstappen.gif&ehk=CS9RERJ5ooVBRw1OSMhbe7%2bXL2QMEE9n%2bW26D%2buOXPc%3d",
+            "Leclerc": "https://www.bing.com/th/id/OGC.6cca03741a0846ab20740c6541ab8ed0?pid=1.7&rurl=https%3a%2f%2fi.pinimg.com%2foriginals%2fbb%2f1a%2f85%2fbb1a8584e6630894dabca8b236d907f7.gif&ehk=z2r9eFVAYn%2bExad3zmuzhMhyOSZYlQIw7%2bA6PWibhxQ%3d",
+            "Norris": "https://www.bing.com/th/id/OGC.49f83dbbcfb78734421383121c49edd0?pid=1.7&rurl=https%3a%2f%2fmedia1.tenor.com%2fm%2frkT7ajLiyE0AAAAC%2flando-norris-lando.gif&ehk=CvWu1oUUtRGYC6jsqLxHDlDEpihqb%2bDSvyga%2bQlWxp0%3d",
+            "Piastri": "https://www.bing.com/th/id/OGC.794cb544fffdadee832f3ca5b85091c6?pid=1.7&rurl=https%3a%2f%2fpreview.redd.it%2fa-short-sequence-to-appreciate-some-oscar-piastri-reactions-v0-9swgky4gmt6d1.gif%3fwidth%3d268%26auto%3dwebp%26s%3d8c2bb28cf2b91ae351866320adee0ab1567588c9&ehk=4pTV8iQoqwIdY%2bUegqLC3brQ8VzOvpSXX3%2bL9LNZxVY%3d",
+            "Alonso": "https://th.bing.com/th/id/R.33fd842fa195974144d583f8c2aaa02d?rik=yka48mcQ8Hy85Q&pid=ImgRaw&r=0",
+            "Sainz": "https://www.bing.com/th/id/OGC.806310ae38905fb86d5078fca7cd8086?pid=1.7&rurl=https%3a%2f%2fmedia1.giphy.com%2fmedia%2fv1.Y2lkPTc5MGI3NjExODNiMWM1ZWYzY2NlNGNhNDk4MWM3ODc5YjQ4ZjBkOTk4M2NjNDgwOCZjdD1n%2fIELPp4xE7W04RHU6oq%2fgiphy.gif&ehk=h32HdL8a47r82sOLWci7U1qlMGyIPoxp4uW%2fzf7VKco%3d",
+            "Hamilton": "https://www.bing.com/th/id/OGC.5fce92952cb9914c2a547d25f010c67a?pid=1.7&rurl=https%3a%2f%2fmedia3.giphy.com%2fmedia%2f1luYFM8UXcE9TYgXVS%2fgiphy.gif&ehk=zwYucQagYqLmjMGAJer3nrb3BVzICf9xZzbhJH3obB4%3d",
+            "Kimi Antonelli": "https://www.bing.com/th/id/OGC.996a75ade4019d8a911540e32ac021df?pid=1.7&rurl=https%3a%2f%2fc.tenor.com%2fCf6MunLw0NEAAAAM%2fkimi-antonelli-prema.gif&ehk=8Txpo%2flH7O4DNg25aHTyhCAobC2t4Yg17gUXM5E0GRE%3d"
+        }
+
+        st.markdown("---")
+        st.markdown(f"<h2 style='text-align: center;'>🥳 Sei {pilota}! 🥳</h2>", unsafe_allow_html=True)
+
+        # Emojis e testuale grafico
+        st.markdown("""
+            <div style='font-size: 2em; text-align: center;'>🎉🎉🎉</div>
+        """, unsafe_allow_html=True)
+
+
+        # Descrizione giocatore
+        col1, col2 = st.columns([1, 2])
+        with col1:
+            st.image(immagini[pilota], use_container_width=True)
+        with col2:
+            st.markdown(f"<div style='padding: 1rem; background-color: #e6f2ff; border-left: 5px solid #001f3f; font-size: 1.2em;'>{descrizioni[pilota]}</div>", unsafe_allow_html=True)
+        
+        # GIF esultanza
+        
+        gif_url = "https://www.bing.com/th/id/OGC.537407970e23722a91c6075932a15545?pid=1.7&rurl=https%3a%2f%2fmedia.giphy.com%2fmedia%2f1X8865dbCf8xNrDPG6%2fgiphy-downsized.gif&ehk=c3%2bBi7T%2bGB0ujmgxGndgKyh%2fWrvTZ2G%2b8s2CMlBnfDs%3d"
+        st.image(gif_url, caption="YAY!!!", use_container_width=True)
+
+        # Anima la celebrazione
+        st.balloons()
+
+        # Pulsante per tornare alla home
+        st.button("↩️ Torna alla home", on_click=torna_home)
 
 # Pagina QUIZ ALLENATORI VJ
 elif st.session_state.pagina == "quiz_allenatori":
