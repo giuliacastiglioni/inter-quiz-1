@@ -34,6 +34,12 @@ def vai_al_quiz_piloti():
     st.session_state.pagina = "quiz_piloti"
     st.session_state.caricamento = False
 
+def vai_al_quiz_PTN():
+    st.session_state.caricamento = True
+    time.sleep(1.5)
+    st.session_state.pagina = "quiz_PTN"
+    st.session_state.caricamento = False
+
 def vai_al_quiz_canzoni():
     st.session_state.caricamento = True
     time.sleep(1.5)
@@ -113,6 +119,10 @@ if st.session_state.pagina == "home":
     if st.button("Quale pilota di Formula 1 sei?    👉"):
         with st.spinner("Caricamento quiz... 🧐"):
             vai_al_quiz_piloti()
+
+    if st.button("Quale canzone dei Pinguini Tattici Nucleari sei?    👉"):
+        with st.spinner("Caricamento quiz... 🧐"):
+            vai_al_quiz_PTN()
 
     if st.button("Quale canzone dei 1D sei?    👉"):
         with st.spinner("Caricamento quiz... 🧐"):
@@ -2212,6 +2222,239 @@ elif st.session_state.pagina == "quiz_sport":
         # GIF esultanza
 
         gif_url = "https://www.bing.com/th/id/OGC.ca93c52c5d5e3ed88274cb6e3222d553?pid=1.7&rurl=https%3a%2f%2fmedia.giphy.com%2fmedia%2f3o6Ztqh4JSlVqi2Z20%2fgiphy.gif&ehk=wSij6bEeaoh8UGpG7zqvDWSZ7ndXfuVggrcaNUFG0%2bI%3d"
+        st.image(gif_url, caption="YAY!!!", use_container_width=True)
+
+        # Anima la celebrazione
+        st.balloons()
+
+        # Pulsante per tornare alla home
+        st.button("↩️ Torna alla home", on_click=torna_home)
+
+
+# Pagina QUIZ PTN
+elif st.session_state.pagina == "quiz_PTN":
+    # Inserisci qui il codice del quiz sull'Inter che hai già scritto
+    st.markdown("<h1 style='text-align: center; color: #001f3f;'> ""Quale canzone dei Pinguini Tattici Nucleari sei? </h1>", unsafe_allow_html=True)
+
+    punteggi_PTN = {
+        "Irene": 0,
+        "Ricordi": 0,
+        "Pastello Bianco": 0,
+        "Verdura": 0,
+        "Ringo Starr": 0,
+        "La Storia Infinita": 0,
+        "Giovani Wannabe": 0,
+        "Antartide": 0,
+    }
+
+    domande_PTN = [
+        {
+            "domanda": "Durante una cena di famiglia, uno zio ti chiede 'Che vuoi fare da grande?'. Come rispondi senza pensarci troppo?",
+            "opzioni": [
+                ("Voglio diventare qualcuno che lascia il segno, anche se mi dicono che sogno troppo.", "Giovani Wannabe"),
+                ("Mi basta restare fedele a chi sono, anche se cambiano tutte le mode.", "Ringo Starr"),
+                ("Voglio costruire qualcosa di eterno, che parli di quello che provo davvero.", "Pastello Bianco"),
+                ("Spero di non dover rispondere mai a questa domanda.", "Verdura"),
+                ("Voglio vivere in un film d’azione con colpi di scena e colonne sonore epiche.", "La Storia Infinita"),
+                ("Andrò in capo al mondo, o forse mi fermerò sotto una coperta a scrivere poesie.", "Antartide"),
+                ("Voglio trovare chi ho perso lungo la strada e dirgli che lo ricordo ancora.", "Ricordi"),
+                ("Voglio vivere una storia d'amore intensa, di quelle che ti cambiano per sempre.", "Irene")
+            ]
+        },
+        {
+            "domanda": "Ti ritrovi a fare karaoke in un bar pieno di sconosciuti. Che canzone scegli e come la canti?",
+            "opzioni": [
+                ("Un pezzo nostalgico, occhi lucidi e voce rotta, ma con orgoglio.", "Ricordi"),
+                ("Una hit pop che urli a squarciagola, anche se stecchi ogni nota.", "Giovani Wannabe"),
+                ("Un brano dolce che sembra una confessione sussurrata.", "Pastello Bianco"),
+                ("Un pezzo degli anni '80 che tutti cantano con te come se foste in un film.", "La Storia Infinita"),
+                ("Una canzone nonsense che nessuno capisce ma tutti ballano.", "Verdura"),
+                ("Un pezzo alternativo che nessuno conosce, ma tu ci credi fortissimo.", "Ringo Starr"),
+                ("Una ballad glaciale e poetica, mentre fuori piove a dirotto.", "Antartide"),
+                ("Una canzone romantica che dedichi a qualcuno nel pubblico che non conosci.", "Irene")
+            ]
+        },
+        {
+            "domanda": "Se fossi una tazza di tè, come ti berresti?",
+            "opzioni": [
+                ("Con calma, osservando il mondo dalla finestra mentre nevica.", "Antartide"),
+                ("Tutto d’un sorso, come un brindisi impulsivo a qualcosa che non capisco ma sento.", "Giovani Wannabe"),
+                ("Scaldato al microonde, dimenticato sul tavolo e poi bevuto freddo... ma con dignità.", "Ringo Starr"),
+                ("Con zucchero, limone e un monologo interiore sulla vita e le sue assurdità.", "Verdura"),
+                ("Con delicatezza, versato in una tazza di ceramica dipinta a mano da qualcuno che amo.", "Pastello Bianco"),
+                ("Durante una festa in maschera, mentre danzo con uno sconosciuto vestito da dinosauro.", "La Storia Infinita"),
+                ("In silenzio, mentre guardo un vecchio album di foto che mi spezza il cuore.", "Ricordi"),
+                ("A piccoli sorsi, cercando lo sguardo di qualcuno che non ha mai saputo quanto ci tenevo.", "Irene")
+            ]
+        },
+        {
+            "domanda": "Ti svegli e scopri di essere diventato un piccione in una metropoli. Cosa fai?",
+            "opzioni": [
+                ("Volo verso un vecchio amore umano e lo seguo da lontano in cerca di senso.", "Irene"),
+                ("Mi intrufolo in una manifestazione e divento il simbolo della rivoluzione urbana.", "Giovani Wannabe"),
+                ("Torno sempre alla stessa panchina, dove qualcuno lascia briciole e bei ricordi.", "Ricordi"),
+                ("Passo ore a osservare le vite altrui dai tetti, scrivendo poesie con il becco.", "Antartide"),
+                ("Organizzo una coreografia aerea con altri piccioni, giusto per il gusto dello spettacolo.", "La Storia Infinita"),
+                ("Mi lancio in picchiata su un panino di un passante, perché la fame è fame.", "Verdura"),
+                ("Faccio il nido sopra un semaforo e divento influencer tra i volatili.", "Ringo Starr"),
+                ("Appena vedo una persona triste, mi poso accanto a lei e non la mollo più.", "Pastello Bianco")
+            ]
+        },
+        {
+            "domanda": "Cosa fai quando senti che tutto si sta muovendo troppo in fretta intorno a te?",
+            "opzioni": [
+                ("Mi chiudo in camera, lascio che il tempo passi e scrivo tutto in una canzone che nessuno leggerà.", "Antartide"),
+                ("Corro ancora più veloce, anche se inciampo. Almeno nessuno potrà dire che non ci ho provato.", "Giovani Wannabe"),
+                ("Mi fermo, prendo un respiro, e cerco di capire cosa sto davvero cercando.", "Pastello Bianco"),
+                ("Cerco qualcuno con cui ridere anche quando tutto sembra andare a rotoli.", "Verdura"),
+                ("Invento una nuova storia nella mia testa, dove tutto ha un senso... anche se non è reale.", "La Storia Infinita"),
+                ("Guardo indietro, provo nostalgia, ma poi mi accorgo che quei ricordi sono il mio carburante.", "Ricordi"),
+                ("Faccio una battuta, sdrammatizzo. È il mio modo di reggere l’urto.", "Ringo Starr"),
+                ("Penso a chi mi ha voluto bene davvero, e spero di essere stato anche io quel tipo di persona.", "Irene")
+            ]
+        },
+        {
+            "domanda": "Quando ami qualcuno, cosa ti fa più paura?",
+            "opzioni": [
+                ("Che non si accorga di tutto ciò che faccio per lui, anche in silenzio.", "Irene"),
+                ("Che un giorno svanisca senza spiegazioni, lasciandomi solo ricordi a metà.", "Ricordi"),
+                ("Che mi cambi, che io non sia più me stesso accanto a quella persona.", "Pastello Bianco"),
+                ("Che ci perdiamo anche se continuiamo a sorridere nelle foto.", "Antartide"),
+                ("Che resti tutto solo un gioco, un’avventura da dimenticare in fretta.", "La Storia Infinita"),
+                ("Che io diventi troppo, che faccia paura con la mia intensità.", "Giovani Wannabe"),
+                ("Che non capisca il mio modo di amare fatto di battute, silenzi e occhiate strane.", "Ringo Starr"),
+                ("Che mi accetti solo nei giorni in cui sembro invincibile, e non in quelli storti.", "Verdura")
+            ]
+        },
+        {
+            "domanda": "Se potessi incontrare la tua versione del futuro, cosa gli chiederesti?",
+            "opzioni": [
+                ("Se anche tu, tra qualche anno, avrai ancora quella sensazione di non aver capito niente.", "Ricordi"),
+                ("Se mi dirai che alla fine sono riuscito a diventare quello che volevo, o se è solo una favola.", "Irene"),
+                ("Se anche tu stai ancora correndo dietro a sogni che non sai se riuscirai a raggiungere.", "La Storia Infinita"),
+                ("Se ci troverai un senso, o se continuerai a ridere dei miei errori come faccio io ora.", "Giovani Wannabe"),
+                ("Se ho imparato a fermarmi o se sono ancora intrappolato in una corsa senza fine.", "Pastello Bianco"),
+                ("Se sei ancora preoccupato che tutto finisca troppo presto, o se finalmente ti sei rassegnato alla velocità della vita.", "Ringo Starr"),
+                ("Se finalmente avrò capito che le cose importanti sono quelle che non vedo, o se continuerò a cercare il tutto nel caos.", "Verdura"),
+                ("Se ci sarà mai qualcuno che capirà davvero cosa succede dentro di me, o se rimarrò sempre un enigma.", "Antartide")
+            ]
+        },
+        {
+            "domanda": "Qual è la cosa che più ti fa arrabbiare della vita, ma non sai nemmeno perché?",
+            "opzioni": [
+                ("Quella sensazione che la gente dica cose che non hanno nemmeno la metà del peso che pensano di avere.", "Irene"),
+                ("Quando le cose vanno troppo bene e ti viene il dubbio che non durino mai.", "La Storia Infinita"),
+                ("Quella voglia di essere in due, ma sentirsi soli nel bel mezzo di una folla.", "Ricordi"),
+                ("Mi fa impazzire quando gli altri mi dicono che la vita è troppo breve, ma nessuno mi spiega come viverla.", "Pastello Bianco"),
+                ("Quando la gente mi dice di smetterla di scherzare e di pensare a cose più serie... come se non lo stesse già facendo.", "Giovani Wannabe"),
+                ("Mi arrabbia quando non trovo la forza di fermarmi e ascoltare, ma continuo a correre senza sosta.", "Verdura"),
+                ("Quando vedi le cose andare troppo in fretta e ti chiedi se sei davvero in grado di tenere il passo.", "Ringo Starr"),
+                ("Mi infastidisce quando le persone si arrabbiano per cose piccole, senza pensare che magari il problema è un altro.", "Antartide")
+            ]
+        },
+        {
+            "domanda": "Quando ti guardi allo specchio, cosa pensi davvero di te stesso?",
+            "opzioni": [
+                ("Penso che probabilmente sto cercando di nascondere qualcosa, ma non sono sicuro di cosa.", "Antartide"),
+                ("A volte mi vedo come un pazzo che cerca di farsi spazio nel caos, ma senza davvero volerlo.", "La Storia Infinita"),
+                ("Mi sento come un pezzo di un puzzle che non ha ancora trovato il posto giusto.", "Pastello Bianco"),
+                ("Guardo e mi chiedo se davvero sono tutto quello che mi raccontano gli altri o se c'è qualcosa di più nascosto.", "Ricordi"),
+                ("Penso che sto solo cercando di far finta che tutto vada bene, ma in fondo so che non è così.", "Giovani Wannabe"),
+                ("A volte vedo un ragazzo che sta facendo del suo meglio per sopravvivere, ma chissà per quanto durerà.", "Irene"),
+                ("Mi guardo e rido. Ogni tanto mi sorprendo di essere proprio io, di essere arrivato fin qui.", "Ringo Starr"),
+                ("Mi vedo come un riflesso di tutte le cose che ho provato, le delusioni e le cose belle. E un po’ mi fa paura.", "Verdura")
+            ]
+        },
+        {
+            "domanda": "Se il tempo fosse una canzone, che genere sarebbe la tua vita?",
+            "opzioni": [
+                ("Una ballata triste e malinconica, ma che ogni tanto ha dei momenti di speranza.", "Irene"),
+                ("Un pezzo elettronico, che va su e giù senza mai fermarsi, pieno di energia e senza mai un attimo di pace.", "Giovani Wannabe"),
+                ("Una canzone rock, con alti e bassi, ma sempre con un filo di speranza che ti fa andare avanti.", "Ricordi"),
+                ("Un brano che sembra confuso, ma alla fine ti fa pensare che forse la confusione è l'unica cosa che ti fa sentire vivo.", "La Storia Infinita"),
+                ("Un pezzo di jazz, che cambia improvvisamente senza preavviso, e ti lascia sempre con il dubbio di cosa succederà dopo.", "Verdura"),
+                ("Una canzone pop che ti fa sentire invincibile, ma poi ti accorgi che è solo una sensazione temporanea.", "Pastello Bianco"),
+                ("Un remix che alterna momenti tranquilli e frenetici, senza mai fermarsi per davvero.", "Ringo Starr"),
+                ("Una canzone indie, un po' strana e introversa, che però ti porta in un mondo tutto suo.", "Antartide")
+            ]
+        },
+        {
+            "domanda": "Se la vita fosse un gioco, qual è la cosa che ti piacerebbe cambiare per vincere?",
+            "opzioni": [
+                ("Vorrei poter scegliere quando fare pausa e quando non farlo. Così sarebbe tutto meno frenetico.", "Giovani Wannabe"),
+                ("Imparerei a prendere la vita meno sul serio, per non essere sempre stressato.", "Irene"),
+                ("Mi piacerebbe avere una mappa, anche se so che non sarebbe utile. Il bello del gioco è non sapere dove stai andando.", "Ringo Starr"),
+                ("Cambierei le regole ogni tanto, per evitare che mi senta sempre intrappolato in una routine.", "Ricordi"),
+                ("Vorrei avere il superpotere di poter vedere il futuro, anche se probabilmente sarebbe troppo noioso.", "Verdura"),
+                ("Mi piacerebbe essere sempre un passo avanti, ma poi mi annoierei e cercherei un altro gioco.", "Pastello Bianco"),
+                ("Cambierei il tempo. Ogni tanto sarebbe bello fermarlo per respirare e godermi il momento.", "La Storia Infinita"),
+                ("Immaginerei di poter cambiare l'atteggiamento delle persone, per sentirmi un po' meno diverso.", "Antartide")
+            ]
+        },
+        {
+            "domanda": "Cosa ti fa sentire più vivo, ma anche più vulnerabile allo stesso tempo?",
+            "opzioni": [
+                ("L'idea di fare qualcosa di impensabile, che ti cambia la vita, ma che potrebbe anche andare male.", "Irene"),
+                ("Fermarmi a riflettere su cosa voglio davvero e poi rendermi conto che non ho idea di cosa sia.", "Ricordi"),
+                ("Il rischio. Ogni volta che faccio qualcosa di nuovo, mi sento entusiasta ma anche terrorizzato.", "Pastello Bianco"),
+                ("Quando sono in mezzo agli altri e sento che potrei essere me stesso, ma ho paura che non mi capiscano.", "Verdura"),
+                ("Quando mi metto alla prova, sentendo la tensione salire, ma anche la consapevolezza che potrei fallire.", "Ringo Starr"),
+                ("Quando mi fermo e guardo il mondo intorno a me, ma non so come far parte di tutto questo.", "La Storia Infinita"),
+                ("Quando sento di poter fare qualcosa che amo, ma temo di non essere abbastanza bravo per farlo davvero.", "Giovani Wannabe"),
+                ("Quando faccio qualcosa di completamente diverso, ma mi sento come un pesce fuori dall’acqua.", "Antartide")
+            ]
+        },
+        {
+            "domanda": "Se il tuo futuro fosse un'ombra che ti segue, cosa faresti per imparare a convivere con la sua presenza?",
+            "opzioni": [
+                ("Cercarei di comprendere le ombre del passato, per non avere paura di quelle che potrebbero venire.", "Irene"),
+                ("Accetterei che la mia ombra non è altro che una parte di me che non posso ignorare, ma posso imparare a rispettare.", "Ricordi"),
+                ("Mi concentrerei sul momento presente, cercando di vivere senza pensare troppo a cosa potrebbe succedere domani.", "Pastello Bianco"),
+                ("Farei in modo che la mia ombra diventi più grande e potente di me, imparando a convivere con la sua forza.", "Verdura"),
+                ("Mi farei coraggio, provando a camminare più velocemente, così che la mia ombra non possa mai raggiungermi.", "Ringo Starr"),
+                ("Cercarei di illuminarla, così che non sembri più un'entità oscura, ma qualcosa che posso capire e abbracciare.", "La Storia Infinita"),
+                ("Non cercherei di fuggirne, ma piuttosto di esplorarla, come un territorio sconosciuto da scoprire.", "Giovani Wannabe"),
+                ("Guarderei in faccia la mia ombra, senza paura, per rendermi conto che è la prova che sono ancora vivo.", "Antartide")
+            ]
+        }
+                    
+    ]
+
+    for d in domande_PTN:
+        st.markdown(f"### {d['domanda']}")
+        risposta = st.radio("", [opt[0] for opt in d["opzioni"]], key=d["domanda"])
+        for testo, PTN in d["opzioni"]:
+            if risposta == testo:
+                punteggi_PTN[PTN] += 1
+
+    if st.button("🏆 Scopri che canzone dei PTN sei!"):
+        PTN = max(punteggi_PTN, key=punteggi_PTN.get)
+
+        descrizioni = {
+            "Irene": "Sei una persona che affronta il futuro con una certa serenità, accettando le sfide senza farti sopraffare dal timore dell'ignoto. La tua forza sta nell'accettare te stessa e nel camminare con determinazione, senza mai temere le ombre del passato o quelle che potrebbero venire.",
+            "Ricordi": "La tua mente è spesso rivolta al passato, ai momenti che ti hanno formato. Ti rifugi nei ricordi, cercando di capire come questi influenzano il tuo presente. Ma non ti dimentichi mai che il futuro è ancora da scrivere, con tutte le sue sorprese e possibilità.",
+            "Pastello Bianco": "Sei una persona che vive nel qui e ora, ma non dimentica mai il peso del passato. Preferisci vivere senza troppe preoccupazioni per il futuro, cercando di non farti sopraffare dalle aspettative. Semplicità e autenticità sono i tuoi punti di forza.",
+            "Verdura": "La tua vita è una continua evoluzione, dove ogni esperienza ti arricchisce come se fossi un albero che cresce e si trasforma. Cerchi di affrontare le difficoltà con grinta, anche se non sempre le cose vanno come vorresti. Sei una persona che cerca di emergere, sempre pronta a lottare per il proprio spazio.",
+            "Ringo Starr": "Hai una visione della vita molto individualista. Non ti accontenti di ciò che ti viene dato, ma cerchi di fare le cose a modo tuo, senza farti fermare da nulla. La tua forza risiede nella tua capacità di andare controcorrente, sempre alla ricerca di nuove esperienze e stimoli.",
+            "La Storia Infinita": "Sei una persona che crede nel potere delle storie e dei racconti. Ogni momento della tua vita è un capitolo che aggiungi a un libro che racconta la tua esistenza. Guardi al futuro come se fosse una storia infinita, con tutte le sue sfide e avventure.",
+            "Giovani Wannabe": "Non hai paura di metterti in gioco e di inseguire i tuoi sogni. Le difficoltà non ti fermano, e affronti ogni sfida con una dose di energia e passione. A volte ti sembra di essere un po' fuori posto, ma non smetti mai di cercare di essere te stessa, in un mondo che ti sembra sempre un po' più grande.",
+            "Antartide": "Sei una persona che si immerge nei propri pensieri, alla ricerca di qualcosa di più profondo. Come l'Antartide, sembri un luogo misterioso, ma ricco di segreti e potenzialità. Non hai paura del freddo o della solitudine, perché sai che la tua forza risiede nella tua capacità di affrontare anche le sfide più difficili con calma e determinazione."
+        }
+
+        st.markdown(f"<h2 style='text-align: center;'>🥳 Sei {PTN}! 🥳</h2>", unsafe_allow_html=True)
+
+        # Emojis e testuale grafico
+        st.markdown("""
+            <div style='font-size: 2em; text-align: center;'>🎉🎉🎉</div>
+        """, unsafe_allow_html=True)
+
+
+        # Descrizione giocatore
+        st.markdown(f"<div style='padding: 1rem; background-color: #e6f2ff; border-left: 5px solid #001f3f; font-size: 1.2em;'>{descrizioni[PTN]}</div>", unsafe_allow_html=True)
+        
+        # GIF esultanza
+
+        gif_url = "https://cdn.gelestatic.it/capital/sites/2/2020/12/pinguini_tattici_nucleari-1200x627.jpg"
         st.image(gif_url, caption="YAY!!!", use_container_width=True)
 
         # Anima la celebrazione
