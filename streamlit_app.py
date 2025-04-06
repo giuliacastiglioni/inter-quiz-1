@@ -1487,7 +1487,7 @@ elif st.session_state.pagina == "quiz_1D":
             ]
         },
         {
-            "domanda": "2. Sei intrappolatə in una fanfic Wattpad del 2013… cosa succede?",
+            "domanda": "4. Sei intrappolato in una fanfic Wattpad del 2013… cosa succede?",
             "opzioni": [
                 ("Sono il bad boy misterioso con un passato difficile, ma cambio per amore. I capelli? Neri ovviamente.", "Zayn"),
                 ("Sono il tuo compagno di banco che ti prende in giro ma in realtà ti ama. Alla fine ti bacia sotto la pioggia.", "Louis"),
@@ -1497,7 +1497,7 @@ elif st.session_state.pagina == "quiz_1D":
             ]
         },
         {
-            "domanda": "4. Quale oggetto sacro del fandom custodiresti come reliquia?",
+            "domanda": "5. Quale oggetto sacro del fandom custodiresti come reliquia?",
             "opzioni": [
                 ("La maglietta a righe di Louis del 2011. Sta in un cassetto sotto chiave.", "Louis"),
                 ("Il cardigan beige di Harry. Irriconoscibile senza di lui.", "Harry"),
@@ -1507,7 +1507,7 @@ elif st.session_state.pagina == "quiz_1D":
             ]
         },
         {
-            "domanda": "5. Ti regalano un cucciolo. Che nome gli dai?",
+            "domanda": "6. Ti regalano un cucciolo. Che nome gli dai?",
             "opzioni": [
                 ("Kevin, ovvio. E parlo con lui tipo *sempre*.", "Louis"),
                 ("Hemsworth. Gli sta bene, no?", "Harry"),
@@ -1517,7 +1517,7 @@ elif st.session_state.pagina == "quiz_1D":
             ]
         },
         {
-            "domanda": "6. Devi scegliere un outfit da concerto: cosa metti?",
+            "domanda": "7. Devi scegliere un outfit da concerto: cosa metti?",
             "opzioni": [
                 ("Camicia sbottonata fino all’ombelico, mille anelli e capelli al vento.", "Harry"),
                 ("Maglietta basic, jeans, e quel sorriso che fa perdere la voce al pubblico.", "Niall"),
@@ -1527,7 +1527,7 @@ elif st.session_state.pagina == "quiz_1D":
             ]
         },
         {
-            "domanda": "7. Ti svegli in una AU in cui fai parte dei 1D. Cosa porti al gruppo?",
+            "domanda": "8. Ti svegli in una AU in cui fai parte dei 1D. Cosa porti al gruppo?",
             "opzioni": [
                 ("L’ironia costante e quella risata che contagia tutti anche a 4AM.", "Louis"),
                 ("La calma zen e il mood da cantautore. Scrivo ballate nel retro del bus.", "Harry"),
@@ -1537,17 +1537,17 @@ elif st.session_state.pagina == "quiz_1D":
             ]
         },
         {
-            "domanda": "8. È mezzanotte. Ti beccano online… cosa stai facendo?",
+            "domanda": "9. È mezzanotte. Ti beccano online… cosa stai facendo?",
             "opzioni": [
                 ("Sto facendo live su Instagram, leggendo fanfiction su me stesso.", "Louis"),
                 ("Sto facendo pane fatto in casa ascoltando Fleetwood Mac.", "Harry"),
                 ("Sto giocando a FIFA e mandando selfie con filtri assurdi.", "Niall"),
                 ("Sto componendo su GarageBand con luci soffuse e incenso acceso.", "Zayn"),
-                ("Sto rispondendo ai commenti con emoji tipo 🫶 mentre faccio squat.", "Liam"),
+                ("Sto rispondendo ai commenti con emoji mentre faccio squat.", "Liam"),
             ]
         },
         {
-            "domanda": "9. In un sogno ricorrente, ti ritrovi nel backstage del TMH tour. Cosa stai facendo?",
+            "domanda": "10. In un sogno ricorrente, ti ritrovi nel backstage del TMH tour. Cosa stai facendo?",
             "opzioni": [
                 ("Sto nascondendo cucchiai di plastica ovunque nel camerino di Harry.", "Louis"),
                 ("Sto scaldando la voce con Ed Sheeran e preparando una tisana alla camomilla.", "Harry"),
@@ -1557,7 +1557,7 @@ elif st.session_state.pagina == "quiz_1D":
             ]
         },
         {
-            "domanda": "10. È il 2013 e sei bloccato in aeroporto con i ragazzi. Che fai?",
+            "domanda": "11. È il 2013 e sei bloccato in aeroporto con i ragazzi. Che fai?",
             "opzioni": [
                 ("Inizio a giocare a 'nascondino estremo' tra i gate. Viene coinvolta anche la security.", "Louis"),
                 ("Sto facendo una playlist chill su Spotify e offro caramelle alla crew.", "Harry"),
@@ -1567,7 +1567,7 @@ elif st.session_state.pagina == "quiz_1D":
             ]
         },
         {
-            "domanda": "13. Sei intrappolato dentro un videoclip degli 1D. Quale scena stai vivendo?",
+            "domanda": "12. Sei intrappolato dentro un videoclip degli 1D. Quale scena stai vivendo?",
             "opzioni": [
                 ("Sto cercando di non affogare nella piscina di *Live While We’re Young* mentre urlo 'HELP!'", "Louis"),
                 ("Sto fissando la telecamera intensamente sotto la neve in *Night Changes*, come se potesse leggere la mia anima.", "Harry"),
@@ -1577,7 +1577,7 @@ elif st.session_state.pagina == "quiz_1D":
             ]
         },
         {
-            "domanda": "15. Quale tweet dimenticato del 2012 ti rappresenta di più spiritualmente?",
+            "domanda": "13. Quale tweet dimenticato del 2012 ti rappresenta di più spiritualmente?",
             "opzioni": [
                 ("'Cats are cool.'", "Harry"),
                 ("'I like girls who eat carrots.'","Louis" ),
@@ -1587,7 +1587,7 @@ elif st.session_state.pagina == "quiz_1D":
             ]
         },
         {
-            "domanda": "17. In quale momento della tua vita ti sei sentito davvero visto?",
+            "domanda": "14. In quale momento della tua vita ti sei sentito davvero visto?",
             "opzioni": [
                 ("Quando ho capito che potevo farcela da solo, anche se nessuno ci credeva.", "Zayn"),
                 ("Quando qualcuno mi ha detto che la mia gentilezza era la mia forza.", "Harry"),
@@ -1597,7 +1597,7 @@ elif st.session_state.pagina == "quiz_1D":
             ]
         },
         {
-            "domanda": "18. Cosa significa per te 'casa'?",
+            "domanda": "15. Cosa significa per te 'casa'?",
             "opzioni": [
                 ("Una chitarra, il suono delle risate, le cose semplici.", "Niall"),
                 ("Un abbraccio che non ha bisogno di parole.", "Zayn"),
@@ -1607,7 +1607,7 @@ elif st.session_state.pagina == "quiz_1D":
             ]
         },
         {
-            "domanda": "19. Quando ti senti perso, cosa ti riporta a te stesso?",
+            "domanda": "16. Quando ti senti perso, cosa ti riporta a te stesso?",
             "opzioni": [
                 ("Scrivere canzoni che non farò mai ascoltare a nessuno.", "Zayn"),
                 ("Mettere le cuffie, uscire a camminare, respirare.", "Harry"),
@@ -1617,7 +1617,7 @@ elif st.session_state.pagina == "quiz_1D":
             ]
         },
         {
-            "domanda": "20. Quale frase descrive la tua idea di amore?",
+            "domanda": "17. Quale frase descrive la tua idea di amore?",
             "opzioni": [
                 ("Ti vedo in tutte le cose belle, anche quando non sei qui.", "Zayn"),
                 ("È una risata condivisa sotto le stelle, anche se domani piove.", "Niall"),
@@ -1627,7 +1627,7 @@ elif st.session_state.pagina == "quiz_1D":
             ]
         },
         {
-            "domanda": "22. Se potessi inviare un messaggio alla tua versione di 10 anni fa, cosa diresti?",
+            "domanda": "18. Se potessi inviare un messaggio alla tua versione di 10 anni fa, cosa diresti?",
             "opzioni": [
                 ("Non cambiare per nessuno, anche se a volte sarà difficile.", "Harry"),
                 ("Le cicatrici che hai oggi saranno le medaglie di domani.", "Louis"),
@@ -1637,7 +1637,7 @@ elif st.session_state.pagina == "quiz_1D":
             ]
         },
         {
-            "domanda": "23. In quale canzone trovi la tua storia?",
+            "domanda": "19. In quale canzone trovi la tua storia?",
             "opzioni": [
                 ("'Little Things'. Perché le parole più semplici mi hanno salvato.","Liam" ),
                 ("'If I Could Fly'. Perché ci sono pensieri che ho detto solo col silenzio.", "Zayn"),
@@ -1647,7 +1647,7 @@ elif st.session_state.pagina == "quiz_1D":
             ]
         },
         {
-            "domanda": "24. Cos’è per te la forza?",
+            "domanda": "20. Cos’è per te la forza?",
             "opzioni": [
                 ("Restare gentile anche quando il mondo ti cambia.", "Harry"),
                 ("Alzarsi ogni volta che cadi, anche se nessuno applaude.", "Louis"),
@@ -1657,7 +1657,7 @@ elif st.session_state.pagina == "quiz_1D":
             ]
         },
         {
-            "domanda": "25. Quando pensi agli One Direction, qual è la verità che porti nel cuore?",
+            "domanda": "21. Quando pensi agli One Direction, qual è la verità che porti nel cuore?",
             "opzioni": [
                 ("Eravamo cinque, ma siamo diventati milioni. E siamo ancora qui.", "Liam"),
                 ("Non importa se si sono separati. Ci hanno insegnato ad amarci tra sconosciuti.", "Niall"),
