@@ -70,7 +70,7 @@ if st.session_state.pagina == "home":
         """
         <style>
         .stButton>button {
-            font-size: 24px;
+            font-size: 40px;
             padding: 24px;
             margin: 10px;
             width: 100%;
