@@ -106,7 +106,7 @@ if st.session_state.pagina == "home":
         with st.spinner("Caricamento quiz... 🧐"):
             vai_al_quiz_ruoli()
 
-    if st.button("Quale sport sei?    👉"):
+    if st.button("Che sport sei?    👉"):
         with st.spinner("Caricamento quiz... 🧐"):
             vai_al_quiz_sport()
 
@@ -2022,7 +2022,7 @@ elif st.session_state.pagina == "quiz_ruoli":
 # Pagina QUIZ SPORT
 elif st.session_state.pagina == "quiz_sport":
     # Inserisci qui il codice del quiz sull'Inter che hai già scritto
-    st.markdown("<h1 style='text-align: center; color: #001f3f;'> ""Quale sport sei? </h1>", unsafe_allow_html=True)
+    st.markdown("<h1 style='text-align: center; color: #001f3f;'> ""Che sport sei? </h1>", unsafe_allow_html=True)
 
     punteggi_sport = {
         "Calcio": 0,
