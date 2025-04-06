@@ -519,7 +519,7 @@ elif st.session_state.pagina == "quiz_piloti":
             ]
         },
         {
-            "domanda": "Se Giulia fosse una pit stop in una gara di F1, come sarebbe?",
+            "domanda": "Se Giulia, creatrice di questo quiz, fosse un pit stop in una gara di F1, come sarebbe?",
             "opzioni": [
                 ("Super veloce, tutto perfetto e con un tocco di precisione in ogni mossa!", "Leclerc"),
                 ("Un po' imprevedibile, ma comunque efficace, riesce sempre a sorprendere!", "Verstappen"),
