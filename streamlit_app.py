@@ -918,7 +918,7 @@ elif st.session_state.pagina == "quiz_cocomere":
             
             "Babi": "Sei la dolcezza incarnata, ma anche una persona che sa quando essere decisa e tenere testa a chiunque! Il tuo cuore grande ti fa essere il supporto migliore per le tue amiche, e il tuo spirito generoso e il tuo amore per la squadra non passano mai inosservati. Ogni volta che ti vediamo in campo, siamo sicure che non ci deluderai mai!",
             
-            "Cla": "Il tuo spirito sportivo ti rendono una cocomera fondamentale! Ogni tua mossa è carica di determinazione, ma non dimentichi mai di essere gentile e pronta ad aiutare le altre. Sei il mix perfetto tra cervello e forza fisica, e la tua energia ci contagia tutte!",
+            "Cla": "Il tuo spirito sportivo è un faro per tutte noi cocomere! Ogni tua mossa è carica di determinazione, ma non dimentichi mai di essere gentile e pronta ad aiutare le altre. Sei il mix perfetto tra cervello e forza fisica, e la tua energia ci contagia tutte!",
             
             "Mame": "La tua dolcezza è infinita, ma anche il tuo spirito ironico ci fa sempre ridere! Non ti lasci mai abbattere dalle difficoltà, e con la tua battuta pronta e la tua gentilezza, fai sorridere tutti. Anche se ti ferma una tallonite, il tuo amore per le cocomere e per la vita è indomabile!",
             
