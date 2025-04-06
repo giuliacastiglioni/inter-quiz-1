@@ -22,6 +22,12 @@ def vai_al_quiz_piloti():
     st.session_state.pagina = "quiz_piloti"
     st.session_state.caricamento = False
 
+def vai_al_quiz_canzoni():
+    st.session_state.caricamento = True
+    time.sleep(1.5)
+    st.session_state.pagina = "quiz_canzoni"
+    st.session_state.caricamento = False
+
 def vai_al_quiz_allenatori():
     st.session_state.caricamento = True
     time.sleep(1.5)
@@ -62,6 +68,10 @@ if st.session_state.pagina == "home":
     if st.button("Quale pilota di Formula 1 sei?    👉"):
         with st.spinner("Caricamento quiz... 🧐"):
             vai_al_quiz_piloti()
+
+    if st.button("Quale canzone dei 1D sei?    👉"):
+        with st.spinner("Caricamento quiz... 🧐"):
+            vai_al_quiz_canzoni()
 
     if st.button("Quale allenatore del VJ Open Femminile sei?    👉"):
         with st.spinner("Caricamento quiz... 🧐"):
@@ -543,7 +553,7 @@ elif st.session_state.pagina == "quiz_piloti":
             st.markdown(f"<div style='padding: 1rem; background-color: #e6f2ff; border-left: 5px solid #001f3f; font-size: 1.2em;'>{descrizioni[pilota]}</div>", unsafe_allow_html=True)
         
         # GIF esultanza
-        
+
         gif_url = "https://www.bing.com/th/id/OGC.537407970e23722a91c6075932a15545?pid=1.7&rurl=https%3a%2f%2fmedia.giphy.com%2fmedia%2f1X8865dbCf8xNrDPG6%2fgiphy-downsized.gif&ehk=c3%2bBi7T%2bGB0ujmgxGndgKyh%2fWrvTZ2G%2b8s2CMlBnfDs%3d"
         st.image(gif_url, caption="YAY!!!", use_container_width=True)
 
@@ -1182,6 +1192,239 @@ elif st.session_state.pagina == "quiz_cocomere":
         """, unsafe_allow_html=True)
 
         st.markdown(f"<div style='padding: 1rem; background-color: #e6f2ff; border-left: 5px solid #001f3f; font-size: 1.2em;'>{descrizioni[cocomera]}</div>", unsafe_allow_html=True)
+
+        # Anima la celebrazione
+        st.balloons()
+
+        # Pulsante per tornare alla home
+        st.button("↩️ Torna alla home", on_click=torna_home)
+
+# CANZONI
+elif st.session_state.pagina == "quiz_canzoni":
+    st.markdown("<h1 style='text-align: center; color: #001f3f;'> Quale canzone dei 1D sei? </h1>", unsafe_allow_html=True)
+
+    punteggi_canzoni = {
+                "What Makes You Beautiful": 0,
+                "Little Things": 0,
+                "Story of My Life": 0, 
+                "Perfect": 0,
+                "Live While We're Young": 0,
+                "Kiss You": 0,
+                "Night Changes": 0,
+                "No Control": 0,
+                "You & I": 0,
+                "Drag Me Down": 0,
+        }
+
+    domande_canzoni = [
+       {
+            "domanda": "1. Se potessi descrivere il tuo modo di affrontare le difficoltà, quale sarebbe la tua strategia?",
+            "opzioni": [
+                ("Non mi fermo mai e continuo a lottare, anche se le cose sembrano difficili.", "What Makes You Beautiful"),
+                ("Cerco di prendere tutto con calma e di apprezzare anche le piccole cose.", "Little Things"),
+                ("Penso che ogni difficoltà sia solo una parte della mia storia, qualcosa che mi rende più forte.", "Story of My Life"),
+                ("Cerco di essere perfetto, cercando di dare il massimo in ogni situazione.", "Perfect"),
+                ("Voglio godermi il viaggio, senza pensare troppo al risultato finale.", "Live While We're Young"),
+                ("Affronto tutto con un sorriso, cercando di rendere ogni momento speciale.", "Kiss You"),
+                ("Accetto che le cose cambiano e cerco di adattarmi senza paura.", "Night Changes"),
+                ("A volte sento di non avere il controllo, ma cerco di lasciare che le cose fluiscano.", "No Control"),
+                ("Credo nell’amore incondizionato, e so che insieme possiamo superare ogni ostacolo.", "You & I"),
+                ("Anche se mi sento abbattuto, so che non è la fine, ma solo l'inizio di qualcosa di nuovo.", "Drag Me Down")
+            ]
+        },
+        {
+            "domanda": "2. Se dovessi scegliere un modo per esprimere il tuo amore, quale sarebbe?",
+            "opzioni": [
+                ("Con ogni sorriso, con ogni parola gentile.", "What Makes You Beautiful"),
+                ("Nei piccoli gesti quotidiani che fanno la differenza.", "Little Things"),
+                ("Scrivendo una storia che racconti tutte le nostre esperienze insieme.", "Story of My Life"),
+                ("In ogni momento che condividiamo, cercando di rendere tutto perfetto.", "Perfect"),
+                ("Facendo qualcosa di folle e divertente, senza preoccupazioni.", "Live While We're Young"),
+                ("Con gesti spontanei e divertenti, senza prendersi troppo sul serio.", "Kiss You"),
+                ("Condividendo il cambiamento, accettando che l’amore evolve.", "Night Changes"),
+                ("Lasciando che l’amore mi prenda senza condizioni.", "No Control"),
+                ("Condividendo una connessione profonda, senza paure o dubbi.", "You & I"),
+                ("Con il cuore aperto, pronto ad affrontare qualsiasi cosa insieme.", "Drag Me Down")
+            ]
+        },
+        {
+            "domanda": "3. Se avessi la possibilità di viaggiare, dove andresti?",
+            "opzioni": [
+                ("In un posto esotico dove ogni giorno è diverso, pieno di avventure.", "What Makes You Beautiful"),
+                ("In un luogo tranquillo, dove posso apprezzare le piccole cose che la vita mi offre.", "Little Things"),
+                ("In un posto che racconti una grande storia, dove il passato e il futuro si incontrano.", "Story of My Life"),
+                ("In un posto perfetto, dove tutto sembra essere come dovrebbe.", "Perfect"),
+                ("In un posto dove posso essere libero, senza pensieri, solo divertirmi.", "Live While We're Young"),
+                ("Ovunque, purché ci sia divertimento e amici con cui condividerlo.", "Kiss You"),
+                ("In un luogo che cambia continuamente, per imparare a vivere il presente.", "Night Changes"),
+                ("In un posto dove posso essere senza freni e vivere ogni istante al massimo.", "No Control"),
+                ("In un luogo dove posso essere me stesso, senza maschere, con chi amo.", "You & I"),
+                ("In un posto dove posso essere libero e affrontare qualsiasi cosa mi venga incontro.", "Drag Me Down")
+            ]
+        },
+        {
+            "domanda": "4. Cosa ti fa sentire veramente vivo?",
+            "opzioni": [
+                ("Ogni attimo che vivo, cercando di godere di ogni bellezza che mi circonda.", "What Makes You Beautiful"),
+                ("Le piccole cose che rendono ogni giorno speciale.", "Little Things"),
+                ("Ogni esperienza che mi cambia, ogni viaggio che mi segna.", "Story of My Life"),
+                ("Quando tutto sembra andare per il meglio, come un sogno che si avvera.", "Perfect"),
+                ("Quando sento la libertà e l’energia di vivere il momento.", "Live While We're Young"),
+                ("Quando riesco a fare qualcosa di spontaneo e divertente con gli altri.", "Kiss You"),
+                ("Quando vedo che tutto cambia, ma sono pronto ad adattarmi e ad affrontarlo.", "Night Changes"),
+                ("Quando non posso fare a meno di seguire le mie passioni, senza alcun freno.", "No Control"),
+                ("Quando posso condividere momenti speciali con qualcuno di veramente importante.", "You & I"),
+                ("Quando tutto sembra crollare, ma trovo la forza di andare avanti.", "Drag Me Down")
+            ]
+        },
+        {
+            "domanda": "5. Se fossi un libro, quale sarebbe il titolo?",
+            "opzioni": [
+                ("La bellezza nelle piccole cose.", "What Makes You Beautiful"),
+                ("Storie di un cuore che non smette mai di battere.", "Little Things"),
+                ("La storia di un viaggio senza fine.", "Story of My Life"),
+                ("Perfezione in ogni dettaglio.", "Perfect"),
+                ("Giovani e senza paura.", "Live While We're Young"),
+                ("Ridere, amare e vivere.", "Kiss You"),
+                ("Cambiamenti e nuove avventure.", "Night Changes"),
+                ("Senza limiti, senza paura.", "No Control"),
+                ("Amore che supera ogni barriera.", "You & I"),
+                ("Forza che non si arrende mai.", "Drag Me Down")
+            ]
+        },
+        {
+            "domanda": "6. Immagina di avere un superpotere, ma solo per una giornata. Cosa faresti?",
+            "opzioni": [
+                ("Vorrei il potere di fare brillare ogni stanza con un sorriso! (E forse farebbe bene anche alla mia autostima).", "What Makes You Beautiful"),
+                ("Trasformerei i piccoli momenti in qualcosa di speciale, tipo quando i dettagli fanno la differenza.", "Little Things"),
+                ("Mi piacerebbe viaggiare nel tempo e riscrivere la mia storia, per vedere dove sarei ora!", "Story of My Life"),
+                ("Trasformerei qualsiasi cosa in qualcosa di perfetto. Anche un giorno piovoso, diventerà bellissimo.", "Perfect"),
+                ("Voglio il potere di far scatenare una festa, ovunque vada. È l'ora di vivere come se non ci fosse un domani!", "Live While We're Young"),
+                ("Mi piacerebbe moltiplicarmi in mille versioni di me stesso, così posso essere ovunque contemporaneamente!", "Kiss You"),
+                ("Vorrei fermare il tempo e vivere ogni secondo senza fretta, proprio come quando le cose più belle accadono in un battito di ciglia.", "Night Changes"),
+                ("Rendere il caos perfetto: trasformerei ogni disastro in qualcosa che ti fa sorridere.", "No Control"),
+                ("Vorrei fondere due cuori in uno, per dimostrare che insieme possiamo fare qualsiasi cosa.", "You & I"),
+                ("Mi piacerebbe volare sopra il mondo, guardando tutto dall'alto, sentendomi invincibile.", "Drag Me Down")
+            ]
+        },
+        {
+            "domanda": "7. Immagina di avere una macchina del tempo. Dove andresti?",
+            "opzioni": [
+                ("Tornerei indietro nel tempo e mi troverei nella mia prima performance davanti a tante persone.", "What Makes You Beautiful"),
+                ("Andrei a scoprire tutti quei piccoli segreti della vita che ancora non ho capito del tutto.", "Little Things"),
+                ("Voglio andare in un periodo passato, magari una festa degli anni '80, e rivivere quella spensieratezza!", "Story of My Life"),
+                ("Andrei nel futuro, dove tutto è perfetto, e il mondo è come una favola.", "Perfect"),
+                ("Vorrei andare nel cuore dell’estate, per vivere a pieno ogni momento come una grande festa.", "Live While We're Young"),
+                ("Viaggerei nel passato per rivedere la mia prima volta al karaoke e urlare a squarciagola!", "Kiss You"),
+                ("Voglio visitare il futuro per vedere come sarò fra dieci anni, pronto a fare ancora il colpo!", "Night Changes"),
+                ("Mi piacerebbe tornare a un momento in cui mi sentivo completamente libero e senza alcuna preoccupazione.", "No Control"),
+                ("Andrei in un posto speciale dove solo io e qualcuno a cui tengo possiamo essere noi stessi.", "You & I"),
+                ("Viaggerei indietro nel tempo per incontrare il me stesso di dieci anni fa e raccontargli tutte le cose che ho imparato.", "Drag Me Down")
+            ]
+        },
+        {
+            "domanda": "8. Se fossi una pianta, quale saresti?",
+            "opzioni": [
+                ("Un girasole, sempre alla ricerca della luce, anche quando tutto attorno sembra buio.", "What Makes You Beautiful"),
+                ("Un cactus, con una bellezza che si vede solo nei dettagli, ma che è anche forte e resistente.", "Little Things"),
+                ("Un albero secolare, che racconta la sua storia con ogni ramo e ogni foglia.", "Story of My Life"),
+                ("Una pianta sempreverde, che non perde mai il suo fascino e si adatta a ogni stagione.", "Perfect"),
+                ("Un fiore di campo, spontaneo, libero e pronto a sbocciare in ogni occasione.", "Live While We're Young"),
+                ("Una pianta rampicante, che cresce e si evolve ogni giorno, trovando sempre nuove strade.", "Kiss You"),
+                ("Un fiore che sboccia solo di notte, come se ogni cambio fosse una sorpresa.", "Night Changes"),
+                ("Un albero che cresce senza paura, trovando sempre nuove radici e nuovi sogni.", "No Control"),
+                ("Un cactus fiorito, perché il fiore che sboccia da me è sempre una sorpresa per chiunque mi conosca.", "You & I"),
+                ("Un bonsai, che cresce lentamente ma in modo costante e con una forza straordinaria.", "Drag Me Down")
+            ]
+        },
+        {
+            "domanda": "9. Se fossi un personaggio di un film, quale sarebbe il tuo ruolo?",
+            "opzioni": [
+                ("Il protagonista che salva tutti con un sorriso e dimostra che la bellezza è dentro di te.", "What Makes You Beautiful"),
+                ("Il migliore amico che ha sempre un consiglio speciale, proprio quando ne hai più bisogno.", "Little Things"),
+                ("L'eroe che supera le difficoltà e trova la sua strada in un'avventura che non dimenticherai mai.", "Story of My Life"),
+                ("Il personaggio che ha tutto sotto controllo, ma che non perde mai il suo lato perfetto.", "Perfect"),
+                ("Il ribelle che si diverte senza freni, ma con un cuore grande e pronto a fare il colpo.", "Live While We're Young"),
+                ("L'amicone che ti fa ridere in ogni situazione, anche quando la scena è un po' imbarazzante.", "Kiss You"),
+                ("L'amico che cambia e cresce con ogni passo che fai, ma che ti accompagna in ogni cambiamento.", "Night Changes"),
+                ("Il personaggio che sfida tutte le convenzioni e vive secondo le proprie regole.", "No Control"),
+                ("Il romantico che sa che, a volte, solo con una persona specialissima puoi essere davvero te stesso.", "You & I"),
+                ("Il coraggioso che affronta ogni difficoltà a testa alta e non si arrende mai.", "Drag Me Down")
+            ]
+        },
+        {
+            "domanda": "Se dovessi scrivere una lettera al futuro, cosa ti diresti?",
+            "opzioni": [
+                ("‘Non dimenticare mai di essere te stesso, perché sei fantastico così!’", "What Makes You Beautiful"),
+                ("‘Apprezza le piccole cose, sono quelle che rendono la vita speciale.’", "Little Things"),
+                ("‘Non dimenticare mai da dove vieni, la tua storia è ciò che ti ha reso forte.’", "Story of My Life"),
+                ("‘Sogna in grande e non avere paura di prendere il volo, la perfezione arriva solo se ci credi.’", "Perfect"),
+                ("‘Fai sempre ciò che ti rende felice, vivi senza rimpianti e con il cuore leggero.’", "Live While We're Young"),
+                ("‘Non preoccuparti troppo delle regole, lascia che la tua energia ti porti ovunque!’", "Kiss You"),
+                ("‘Le cose cambiano, ma tu sei abbastanza forte per affrontarle tutte.’", "Night Changes"),
+                ("‘A volte il caos è necessario, ma in fondo troverai sempre la tua strada.’", "No Control"),
+                ("‘L’amore è la chiave di tutto, continua a crederci.’", "You & I"),
+                ("‘Sii coraggioso, prendi il volo e non fermarti mai, la vita ti sta aspettando.’", "Drag Me Down")
+            ]
+        }
+]
+
+        
+    for d in domande_canzoni:
+        st.markdown(f"### {d['domanda']}")
+        risposta = st.radio("", [opt[0] for opt in d["opzioni"]], key=d["domanda"])
+        for testo, canzone in d["opzioni"]:
+            if risposta == testo:
+                punteggi_canzoni[canzone] += 1
+
+    if st.button("🏆 Scopri chi sei!"):
+        canzone = max(punteggi_canzoni, key=punteggi_canzoni.get)
+
+        descrizioni = {
+                "What Makes You Beautiful": "Sei la persona che illumina la stanza, sempre pronta a far brillare gli altri. Ti piace mostrare il meglio di te e lo fai con una naturalezza disarmante. La tua bellezza è unica, ma non è solo quella fisica: è la tua luce interiore che conquista chi ti sta intorno.",
+                "Little Things": "Sei il tipo di persona che trova gioia nelle piccole cose. Apprezzi i dettagli, la semplicità e le sfumature della vita. Hai un cuore grande e sei sempre lì per chi hai vicino, anche nei momenti più delicati. Le piccole cose sono quelle che davvero contano per te.",
+                "Story of My Life": "La tua vita è un viaggio di esperienze che ti hanno reso la persona che sei oggi. Non hai paura di guardarti indietro e riflettere su ciò che ti ha formato, e ti fidi del percorso che hai scelto. Le tue storie sono quelle che ti rendono autentico e forte.",
+                "Perfect": "Sei il tipo di persona che cerca sempre la perfezione, ma senza mai perderti nel tentativo. La tua passione per la vita ti spinge a dare il massimo, e le persone ti ammirano per la tua dedizione e il tuo spirito instancabile. Sei un esempio di equilibrio tra il sogno e la realtà.",
+                "Live While We're Young": "Non ti prendi troppo sul serio e sai come goderti la vita! Ti piace l'avventura, non hai paura di rischiare e sei sempre pronto a vivere il momento al massimo. La tua energia è contagiosa, ed è impossibile non voler essere parte del tuo mondo spensierato.",
+                "Kiss You": "Sei la persona che non si prende mai troppo sul serio e ama divertirsi. Hai un’anima libera e un cuore aperto, sempre pronto a fare nuove esperienze. La tua spontaneità è il tuo superpotere, e non c’è mai un momento noioso quando sei nei paraggi.",
+                "Night Changes": "Le cose possono cambiare, ma tu sei sempre pronto a adattarti. Accogli il cambiamento con una calma sorprendente, perché sai che la vita è fatta di alti e bassi. Ogni esperienza ti rende più forte e consapevole, e riesci a trovare bellezza anche nei momenti più inaspettati.",
+                "No Control": "La vita è un po' come una corsa senza freni per te. Ti piace l’adrenalina e spesso ti ritrovi a lanciarti in nuove avventure senza pensare troppo alle conseguenze. Sei il tipo che non ha paura di perdere il controllo, perché sai che alla fine troverai sempre un modo per uscirne alla grande.",
+                "You & I": "Credi nel potere delle connessioni e sei convinto che l’amore possa superare ogni ostacolo. Sei la persona che sa che, quando ci si trova, nulla è impossibile. Le tue relazioni sono sempre sincere e genuine, e credi che la forza delle persone si trovi nell’essere uniti.",
+                "Drag Me Down": "Non ti lasci mai abbattere dalle difficoltà. La tua forza è incredibile e sei sempre pronto a superare qualsiasi ostacolo ti si presenti. Non hai paura di affrontare la sfida e ogni giorno ti spinge ad essere più forte, perché sai che nessuno può fermarti."
+            }
+
+        canzoni_audio = {
+                "What Makes You Beautiful": "/workspaces/inter-quiz-1/data/ytmp3free.cc_one-direction-what-makes-you-beautifullyrics-youtubemp3free.org.mp3",
+                "Little Things": "/workspaces/inter-quiz-1/data/ytmp3free.cc_one-direction-little-things-lyrics-peepop-youtubemp3free.org.mp3",
+                "Story of My Life": "/workspaces/inter-quiz-1/data/ytmp3free.cc_one-direction-story-of-my-life-lyrics-youtubemp3free.org.mp3",
+                "Perfect": "/workspaces/inter-quiz-1/data/ytmp3free.cc_one-direction-perfect-lyrics-youtubemp3free.org.mp3",
+                "Live While We're Young": "/workspaces/inter-quiz-1/data/ytmp3free.cc_live-while-were-young-one-direction-lyrics-youtubemp3free.org.mp3",
+                "Kiss You": "/workspaces/inter-quiz-1/data/One Direction - Kiss You (Lyric Video) [XAXE3JANcsU].mp3",
+                "Night Changes": "/workspaces/inter-quiz-1/data/One Direction - Night Changes (Lyrics) [bMBdqvJWofQ].mp3",
+                "No Control": "/workspaces/inter-quiz-1/data/ytmp3free.cc_no-control-one-direction-lyrics-youtubemp3free.org.mp3",
+                "You & I": "/workspaces/inter-quiz-1/data/You & I - One Direction (Lyrics) 🎵 [iF3UguVMD_I].mp3",
+                "Drag Me Down": "/workspaces/inter-quiz-1/data/Drag Me Down - One Direction (Lyrics) [ZU0px2oUO7A].mp3"
+            }
+        
+
+        st.markdown(f"<h2 style='text-align: center;'>🥳 Sei {canzone}! 🥳</h2>", unsafe_allow_html=True)
+ 
+ 
+        # Riproduci la musica della canzone
+        st.audio(canzoni_audio[canzone], format='audio/mp3')
+
+
+        # Emojis e testuale grafico
+        st.markdown("""
+            <div style='font-size: 2em; text-align: center;'>🎉🎉🎉</div>
+        """, unsafe_allow_html=True)
+
+        st.markdown(f"<div style='padding: 1rem; background-color: #e6f2ff; border-left: 5px solid #001f3f; font-size: 1.2em;'>{descrizioni[canzone]}</div>", unsafe_allow_html=True)
+
+
+
+
+
 
         # Anima la celebrazione
         st.balloons()
