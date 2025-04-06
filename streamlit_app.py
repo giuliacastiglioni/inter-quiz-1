@@ -28,6 +28,12 @@ def vai_al_quiz_canzoni():
     st.session_state.pagina = "quiz_canzoni"
     st.session_state.caricamento = False
 
+def vai_al_quiz_1D():
+    st.session_state.caricamento = True
+    time.sleep(1.5)
+    st.session_state.pagina = "quiz_1D"
+    st.session_state.caricamento = False
+
 def vai_al_quiz_allenatori():
     st.session_state.caricamento = True
     time.sleep(1.5)
@@ -72,6 +78,10 @@ if st.session_state.pagina == "home":
     if st.button("Quale canzone dei 1D sei?    👉"):
         with st.spinner("Caricamento quiz... 🧐"):
             vai_al_quiz_canzoni()
+
+    if st.button("Che cantante degli One Direction sei?    👉"):
+        with st.spinner("Caricamento quiz... 🧐"):
+            vai_al_quiz_1D()
 
     if st.button("Quale allenatore del VJ Open Femminile sei?    👉"):
         with st.spinner("Caricamento quiz... 🧐"):
@@ -1425,6 +1435,293 @@ elif st.session_state.pagina == "quiz_canzoni":
 
 
 
+
+        # Anima la celebrazione
+        st.balloons()
+
+        # Pulsante per tornare alla home
+        st.button("↩️ Torna alla home", on_click=torna_home)
+
+# Pagina QUIZ 1D
+elif st.session_state.pagina == "quiz_1D":
+    # Inserisci qui il codice del quiz sull'Inter che hai già scritto
+    st.markdown("<h1 style='text-align: center; color: #001f3f;'> Quale cantante degli 1D sei?  </h1>", unsafe_allow_html=True)
+
+    punteggi_1D = {
+        "Louis": 0,
+        "Harry": 0,
+        "Zayn": 0,
+        "Liam": 0,
+        "Niall": 0,
+    }
+
+    domande_1D = [
+        {
+            "domanda": "1. Quale di queste frasi potresti tatuarti senza pensarci due volte?",
+            "opzioni": [
+                ("'Vas happenin?!'", "Zayn"),
+                ("'I'm Harry. Styles.'", "Harry"),
+                ("'Just chillin' out, me box.'", "Niall"),
+                ("'CATS, MATE. CATS.'", "Louis"),
+                ("'I once cried because I saw a baby goat.',", "Liam"),
+            ]
+        },
+        {
+            "domanda": "2. Se fossi un tweet iconico degli 1D, saresti...",
+            "opzioni": [
+                ("Louis che urla 'Always in my heart @Harry_Styles. Yours sincerely, Louis.'", "Louis"),
+                ("Zayn che twitta solo emoji confuse e sparisce.", "Zayn"),
+                ("Niall che scrive 'CAN’T BELIEVE THIS IS OUR LIFE. THANK YOU.' 100 volte.", "Niall"),
+                ("Harry che twitta 'All the love as always.' enigmatico come sempre.", "Harry"),
+                ("Liam che cambia username ogni tre mesi e confonde tutti.", "Liam"),
+            ]
+        },
+        {
+            "domanda": "3. Qual è la tua energy durante un'intervista con i ragazzi?",
+            "opzioni": [
+                ("Rispondi con sarcasmo e sguardi in camera come se fossi in The Office.", "Louis"),
+                ("Cerchi di calmare tutti e rispondi come un angelo.", "Liam"),
+                ("Ti parte una battuta fuori luogo e ridi da solo per 10 minuti.", "Niall"),
+                ("Ti limiti a sorridere e poi dici qualcosa di profondo e silenzioso.", "Zayn"),
+                ("Fai il misterioso e ogni tanto parli di poesia.", "Harry"),
+            ]
+        },
+        {
+            "domanda": "2. Sei intrappolatə in una fanfic Wattpad del 2013… cosa succede?",
+            "opzioni": [
+                ("Sono il bad boy misterioso con un passato difficile, ma cambio per amore. I capelli? Neri ovviamente.", "Zayn"),
+                ("Sono il tuo compagno di banco che ti prende in giro ma in realtà ti ama. Alla fine ti bacia sotto la pioggia.", "Louis"),
+                ("Sono il nuovo studente che scrive canzoni su di te e ti guarda intensamente da lontano.", "Harry"),
+                ("Sono il fratello del tuo migliore amico. Ti proteggo sempre, e ho una cotta segreta per te da anni.", "Liam"),
+                ("Sono il vicino irlandese simpatico che ti invita a mangiare pancakes e poi ti porta a un concerto segreto.", "Niall"),
+            ]
+        },
+        {
+            "domanda": "4. Quale oggetto sacro del fandom custodiresti come reliquia?",
+            "opzioni": [
+                ("La maglietta a righe di Louis del 2011. Sta in un cassetto sotto chiave.", "Louis"),
+                ("Il cardigan beige di Harry. Irriconoscibile senza di lui.", "Harry"),
+                ("La chitarra rossa di Niall autografata. L’ho sognata.", "Niall"),
+                ("Il piercing al naso di Zayn. Letteralmente arte moderna.", "Zayn"),
+                ("Una pagella del liceo di Liam stampata da Twitter nel 2012. Studio.", "Liam"),
+            ]
+        },
+        {
+            "domanda": "5. Ti regalano un cucciolo. Che nome gli dai?",
+            "opzioni": [
+                ("Kevin, ovvio. E parlo con lui tipo *sempre*.", "Louis"),
+                ("Hemsworth. Gli sta bene, no?", "Harry"),
+                ("Guinness, perché è irlandese dentro. Anche se è un golden retriever.", "Niall"),
+                ("Ziggy. Gli piacciono i dischi di Bowie. E sì, è un cane hipster.", "Zayn"),
+                ("Apollo. Perché è un atleta, corre tipo il vento. Anche troppo.", "Liam"),
+            ]
+        },
+        {
+            "domanda": "6. Devi scegliere un outfit da concerto: cosa metti?",
+            "opzioni": [
+                ("Camicia sbottonata fino all’ombelico, mille anelli e capelli al vento.", "Harry"),
+                ("Maglietta basic, jeans, e quel sorriso che fa perdere la voce al pubblico.", "Niall"),
+                ("T-shirt a righe, skinny jeans e Converse consumate. Non si cambia.", "Louis"),
+                ("Bomber oversize, sguardo enigmatico, tatuaggi in vista. Non parlo, ma spacco.", "Zayn"),
+                ("Canotta, occhiali da sole anche di notte, e salto atletico a metà set.", "Liam"),
+            ]
+        },
+        {
+            "domanda": "7. Ti svegli in una AU in cui fai parte dei 1D. Cosa porti al gruppo?",
+            "opzioni": [
+                ("L’ironia costante e quella risata che contagia tutti anche a 4AM.", "Louis"),
+                ("La calma zen e il mood da cantautore. Scrivo ballate nel retro del bus.", "Harry"),
+                ("L’energia instancabile: chitarra, risate, e qualche passo di danza goffo.", "Niall"),
+                ("Un’aura di mistero, un diario pieno di disegni e versi segreti.", "Zayn"),
+                ("Il piano B per ogni disastro: sono l’organizzatore, l’ancora, il papà.", "Liam"),
+            ]
+        },
+        {
+            "domanda": "8. È mezzanotte. Ti beccano online… cosa stai facendo?",
+            "opzioni": [
+                ("Sto facendo live su Instagram, leggendo fanfiction su me stesso.", "Louis"),
+                ("Sto facendo pane fatto in casa ascoltando Fleetwood Mac.", "Harry"),
+                ("Sto giocando a FIFA e mandando selfie con filtri assurdi.", "Niall"),
+                ("Sto componendo su GarageBand con luci soffuse e incenso acceso.", "Zayn"),
+                ("Sto rispondendo ai commenti con emoji tipo 🫶 mentre faccio squat.", "Liam"),
+            ]
+        },
+        {
+            "domanda": "9. In un sogno ricorrente, ti ritrovi nel backstage del TMH tour. Cosa stai facendo?",
+            "opzioni": [
+                ("Sto nascondendo cucchiai di plastica ovunque nel camerino di Harry.", "Louis"),
+                ("Sto scaldando la voce con Ed Sheeran e preparando una tisana alla camomilla.", "Harry"),
+                ("Sto cercando disperatamente il mio ukulele rosa. L’ha preso Liam, lo so.", "Niall"),
+                ("Sto scrivendo versi sulle pareti con eyeliner nero mentre nessuno guarda.", "Zayn"),
+                ("Sto sistemando le scalette dello show con tre walkie-talkie attivi.", "Liam"),
+            ]
+        },
+        {
+            "domanda": "10. È il 2013 e sei bloccato in aeroporto con i ragazzi. Che fai?",
+            "opzioni": [
+                ("Inizio a giocare a 'nascondino estremo' tra i gate. Viene coinvolta anche la security.", "Louis"),
+                ("Sto facendo una playlist chill su Spotify e offro caramelle alla crew.", "Harry"),
+                ("Ho organizzato un mini torneo di Uno con regole modificate da me.", "Niall"),
+                ("Scrivo il testo di una nuova canzone sul retro di una boarding pass.", "Zayn"),
+                ("Controllo il tempo d’attesa, ordino cibo per tutti e tengo calmi i fan.", "Liam"),
+            ]
+        },
+        {
+            "domanda": "13. Sei intrappolato dentro un videoclip degli 1D. Quale scena stai vivendo?",
+            "opzioni": [
+                ("Sto cercando di non affogare nella piscina di *Live While We’re Young* mentre urlo 'HELP!'", "Louis"),
+                ("Sto fissando la telecamera intensamente sotto la neve in *Night Changes*, come se potesse leggere la mia anima.", "Harry"),
+                ("Mi sto rotolando in mezzo al prato con una GoPro attaccata al petto come in *You & I*.", "Niall"),
+                ("Sto guidando una barca in *Kiss You*, ma non so nuotare e nessuno mi ha detto dove andare.", "Zayn"),
+                ("Sto scrivendo il copione di *Story of My Life* e piango mentre lo recitiamo. Tutti piangono.", "Liam"),
+            ]
+        },
+        {
+            "domanda": "15. Quale tweet dimenticato del 2012 ti rappresenta di più spiritualmente?",
+            "opzioni": [
+                ("'Cats are cool.'", "Harry"),
+                ("'I like girls who eat carrots.'","Louis" ),
+                ("'Tuna is nice.'", "Niall"),
+                ("'Just chilling on the roof, thinking about stuff.'", "Zayn"),
+                ("'I just burnt my toast.'", "Liam"),
+            ]
+        },
+        {
+            "domanda": "17. In quale momento della tua vita ti sei sentito davvero visto?",
+            "opzioni": [
+                ("Quando ho capito che potevo farcela da solo, anche se nessuno ci credeva.", "Zayn"),
+                ("Quando qualcuno mi ha detto che la mia gentilezza era la mia forza.", "Harry"),
+                ("Quando ho fatto ridere gli altri anche se dentro mi sentivo fragile.", "Louis"),
+                ("Quando sono riuscito a essere me stesso senza chiedere scusa.", "Niall"),
+                ("Quando ho messo da parte le mie paure per prendermi cura degli altri.", "Liam"),
+            ]
+        },
+        {
+            "domanda": "18. Cosa significa per te 'casa'?",
+            "opzioni": [
+                ("Una chitarra, il suono delle risate, le cose semplici.", "Niall"),
+                ("Un abbraccio che non ha bisogno di parole.", "Zayn"),
+                ("Un luogo in cui posso ballare in mutande e nessuno mi giudica.", "Harry"),
+                ("Un gruppo di amici che mi prende in giro ma mi ama più di ogni cosa.", "Louis"),
+                ("Un posto dove le responsabilità si alleggeriscono perché siamo insieme.", "Liam"),
+            ]
+        },
+        {
+            "domanda": "19. Quando ti senti perso, cosa ti riporta a te stesso?",
+            "opzioni": [
+                ("Scrivere canzoni che non farò mai ascoltare a nessuno.", "Zayn"),
+                ("Mettere le cuffie, uscire a camminare, respirare.", "Harry"),
+                ("Fare qualcosa per qualcun altro, anche solo un messaggio carino.", "Liam"),
+                ("Guardare indietro e ricordare tutto ciò che ho già superato.", "Louis"),
+                ("Parlare con qualcuno che mi conosce davvero.", "Niall"),
+            ]
+        },
+        {
+            "domanda": "20. Quale frase descrive la tua idea di amore?",
+            "opzioni": [
+                ("Ti vedo in tutte le cose belle, anche quando non sei qui.", "Zayn"),
+                ("È una risata condivisa sotto le stelle, anche se domani piove.", "Niall"),
+                ("Amore è libertà. È sapere che posso andare via… ma scelgo di restare.", "Harry"),
+                ("È restare anche nei giorni in cui non sono facile da amare.", "Louis"),
+                ("È proteggere, anche da lontano. Sempre.", "Liam"),
+            ]
+        },
+        {
+            "domanda": "22. Se potessi inviare un messaggio alla tua versione di 10 anni fa, cosa diresti?",
+            "opzioni": [
+                ("Non cambiare per nessuno, anche se a volte sarà difficile.", "Harry"),
+                ("Le cicatrici che hai oggi saranno le medaglie di domani.", "Louis"),
+                ("Va tutto bene anche se non lo capisci adesso.", "Zayn"),
+                ("Ridi più che puoi. Davvero, non smettere.", "Niall"),
+                ("Sii forte, ma ricorda che puoi anche crollare.", "Liam"),
+            ]
+        },
+        {
+            "domanda": "23. In quale canzone trovi la tua storia?",
+            "opzioni": [
+                ("'Little Things'. Perché le parole più semplici mi hanno salvato.","Liam" ),
+                ("'If I Could Fly'. Perché ci sono pensieri che ho detto solo col silenzio.", "Zayn"),
+                ("'Through The Dark'. Perché voglio essere la luce per qualcun altro.", "Louis"),
+                ("'Don't Forget Where You Belong'. Perché a volte ci si perde per ritrovarsi meglio.", "Niall"),
+                ("'Fine Line' (anche se è da solista). Perché ogni fine ha il suo modo di essere bella.", "Harry"),
+            ]
+        },
+        {
+            "domanda": "24. Cos’è per te la forza?",
+            "opzioni": [
+                ("Restare gentile anche quando il mondo ti cambia.", "Harry"),
+                ("Alzarsi ogni volta che cadi, anche se nessuno applaude.", "Louis"),
+                ("Saper dire di no quando tutti si aspettano un sì.", "Zayn"),
+                ("Essere lì per gli altri, anche quando tu ne avresti bisogno.", "Liam"),
+                ("Continuare a sperare, anche quando non c’è nessun motivo evidente.", "Niall"),
+            ]
+        },
+        {
+            "domanda": "25. Quando pensi agli One Direction, qual è la verità che porti nel cuore?",
+            "opzioni": [
+                ("Eravamo cinque, ma siamo diventati milioni. E siamo ancora qui.", "Liam"),
+                ("Non importa se si sono separati. Ci hanno insegnato ad amarci tra sconosciuti.", "Niall"),
+                ("Non ho mai conosciuto nessuno di loro, ma mi hanno fatto sentire visto.", "Harry"),
+                ("Anche nei giorni peggiori, bastava una loro canzone per respirare.", "Zayn"),
+                ("Non si tratta solo di musica. Si tratta di crescere insieme, anche a distanza.", "Louis"),
+            ]
+        },      
+
+
+        
+    ]
+
+    for d in domande_1D:
+        st.markdown(f"### {d['domanda']}")
+        risposta = st.radio("", [opt[0] for opt in d["opzioni"]], key=d["domanda"])
+        for testo, cantante in d["opzioni"]:
+            if risposta == testo:
+                punteggi_1D[cantante] += 1
+
+    if st.button("🏆 Scopri chi sei!"):
+        cantante = max(punteggi_1D, key=punteggi_1D.get)
+
+        descrizioni= {
+            "Liam": "Sei il tipo di persona che preferisce non essere al centro dell'attenzione, ma quando parla, tutti ti ascoltano. La tua leadership è discreta ma solida, e anche se tendi a metterti in secondo piano, chi ti conosce sa che sei un pilastro su cui si può sempre contare. Dietro alla tua serietà c'è un cuore che batte forte per chi ama veramente. Senti sempre il peso della responsabilità, ma il tuo desiderio di far crescere gli altri è ciò che ti rende davvero speciale.",
+            
+            "Niall": "Il tuo sorriso è contagioso e la tua risata è un rifugio sicuro per tutti. Sei la persona che sa come alleggerire una giornata, ma dietro quella facciata spensierata c'è una profondità che solo chi ti conosce davvero riesce a vedere. Ti piace ascoltare gli altri, prendersi cura delle persone e condividere con chi ti sta accanto. Il tuo cuore è grande, e l'unica cosa che ami più di un bel momento di divertimento è vedere gli altri felici accanto a te.",
+            
+            "Harry": "Sei il sognatore che riesce a rendere tangibile l'impossibile. Con i tuoi occhi sempre alla ricerca di qualcosa di più grande, non hai paura di esprimere chi sei veramente. Il tuo cuore è aperto al mondo e la tua vulnerabilità è la forza che ispira chi ti ama. Sei un vero artista, ma la tua profondità non si limita alla musica – ti mostri per quello che sei, senza paura di essere giudicato. La tua autenticità è la tua più grande bellezza, e chi ti segue sa che non esistono maschere con te.",
+            
+            "Zayn": "Sei l'anima misteriosa che lascia un'impressione indelebile. Il tuo silenzio parla più di mille parole e quando parli, c'è sempre una verità che colpisce dritto al cuore. Non ti preoccupi di conformarti alle aspettative degli altri, e la tua visione del mondo è unica. Sei l'artista che crea in modo autentico e senza compromessi, e mentre il mondo ti guarda da lontano, tu preferisci essere lontano dai riflettori. Ma chi ha il privilegio di conoscerti sa che dietro la tua riservatezza si cela una passione travolgente.",
+            
+            "Louis": "Sei il ribelle con un cuore grande e una passione che non si può ignorare. Ogni cosa che fai è guidata da un'emozione autentica, ed è difficile non essere coinvolti dalla tua energia. Non hai paura di lottare per ciò che è giusto, anche se a volte questo ti rende più vulnerabile. La tua sincerità è ciò che ti rende speciale, e chi ti conosce sa che sei un amico che non tradisce mai. In ogni battaglia che affronti, riesci sempre a portare un po' di luce, anche nei momenti più oscuri.",
+        }
+
+
+        immagini = {
+            "Louis": "https://www.bing.com/th/id/OGC.bf42f8846b9c43e9ff3988d8904574e0?pid=1.7&rurl=https%3a%2f%2fmedia1.tenor.com%2fimages%2fbf42f8846b9c43e9ff3988d8904574e0%2ftenor.gif%3fitemid%3d17969872&ehk=LoxWJrw5uFWymoWu5xycjiUsfiWpRO1azUaUiDg%2fxQQ%3d",
+            "Harry": "https://www.bing.com/th/id/OGC.da39af0fba0654cdde29f08ec0ebd69e?pid=1.7&rurl=https%3a%2f%2fi.pinimg.com%2foriginals%2f68%2f8c%2fe8%2f688ce861c57c432e787346669c5de201.gif&ehk=2hAe%2fpXZJYnhRFvUfrk2jC01oBCcWkSfxHywRtQinrc%3d",
+            "Niall": "https://www.bing.com/th/id/OGC.d8417aabfcca87f39d8926ff501c102f?pid=1.7&rurl=https%3a%2f%2fgiffiles.alphacoders.com%2f207%2f207268.gif&ehk=GmQpKOwL2ZZu2JfAXAUXuVbJrMprH9CBoepx7zK0HB8%3d",
+            "Liam": "https://www.bing.com/th/id/OGC.85a1d04ee651763f79ca1fa7d03fe8d3?pid=1.7&rurl=https%3a%2f%2fmedia.tenor.com%2fGepYe1THHXoAAAAC%2fliam-payne-smiling-and-laughing.gif&ehk=P3rTG65G9Cl9DW4Q72igK%2fipdmpykzFjlX7GK%2fn0FMg%3d",
+            "Zayn": "https://www.bing.com/th/id/OGC.3dd72a1b5ded59790388e6bd2c58d3a4?pid=1.7&rurl=https%3a%2f%2fmedia.giphy.com%2fmedia%2f2kS4wNFnntUju%2fgiphy.gif&ehk=QmFyxh%2bpBnKbfvgS1ClVU158ZbAhNQGHySZX8TC%2fc7A%3d",
+        }
+
+        st.markdown("---")
+        st.markdown(f"<h2 style='text-align: center;'>🥳 Sei {cantante}! 🥳</h2>", unsafe_allow_html=True)
+
+        # Emojis e testuale grafico
+        st.markdown("""
+            <div style='font-size: 2em; text-align: center;'>🎉🎉🎉</div>
+        """, unsafe_allow_html=True)
+
+
+        # Descrizione giocatore
+        col1, col2 = st.columns([1, 2])
+        with col1:
+            st.image(immagini[cantante], use_container_width=True)
+        with col2:
+            st.markdown(f"<div style='padding: 1rem; background-color: #e6f2ff; border-left: 5px solid #001f3f; font-size: 1.2em;'>{descrizioni[cantante]}</div>", unsafe_allow_html=True)
+        
+        # GIF esultanza
+
+        gif_url = "https://www.bing.com/th/id/OGC.411dcc394eb0384bfd8765cccf3ace12?pid=1.7&rurl=https%3a%2f%2fbestgifs.makeagif.com%2fwp-content%2fuploads%2f2015%2f06%2fezgif.com-resize.gif&ehk=EpByc1km7VoOU3RThu1a6HbudidvdAZLuEy7%2fifFKrQ%3d"
+        st.image(gif_url, caption="YAY!!!", use_container_width=True)
 
         # Anima la celebrazione
         st.balloons()
