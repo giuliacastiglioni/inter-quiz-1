@@ -16,6 +16,12 @@ def vai_al_quiz_inter():
     st.session_state.pagina = "quiz_inter"
     st.session_state.caricamento = False
 
+def vai_al_quiz_ruoli():
+    st.session_state.caricamento = True
+    time.sleep(1.5)
+    st.session_state.pagina = "quiz_ruoli"
+    st.session_state.caricamento = False
+
 def vai_al_quiz_piloti():
     st.session_state.caricamento = True
     time.sleep(1.5)
@@ -89,6 +95,10 @@ if st.session_state.pagina == "home":
     if st.button("Quale calciatore dell'Inter sei?    👉"):
         with st.spinner("Caricamento quiz... 🧐"):
             vai_al_quiz_inter()
+
+    if st.button("Quale ruolo calcistico sei?    👉"):
+        with st.spinner("Caricamento quiz... 🧐"):
+            vai_al_quiz_ruoli()
 
     if st.button("Quale pilota di Formula 1 sei?    👉"):
         with st.spinner("Caricamento quiz... 🧐"):
@@ -1741,6 +1751,256 @@ elif st.session_state.pagina == "quiz_1D":
         # GIF esultanza
 
         gif_url = "https://www.bing.com/th/id/OGC.411dcc394eb0384bfd8765cccf3ace12?pid=1.7&rurl=https%3a%2f%2fbestgifs.makeagif.com%2fwp-content%2fuploads%2f2015%2f06%2fezgif.com-resize.gif&ehk=EpByc1km7VoOU3RThu1a6HbudidvdAZLuEy7%2fifFKrQ%3d"
+        st.image(gif_url, caption="YAY!!!", use_container_width=True)
+
+        # Anima la celebrazione
+        st.balloons()
+
+        # Pulsante per tornare alla home
+        st.button("↩️ Torna alla home", on_click=torna_home)
+
+# Pagina QUIZ RUOLI
+elif st.session_state.pagina == "quiz_ruoli":
+    # Inserisci qui il codice del quiz sull'Inter che hai già scritto
+    st.markdown("<h1 style='text-align: center; color: #001f3f;'> ""⚽ Quale ruolo calcistico sei? </h1>", unsafe_allow_html=True)
+
+    punteggi_ruoli = {
+        "Portiere": 0,
+        "Difensore": 0,
+        "Centrocampista": 0,
+        "Attaccante": 0,
+        "Ali": 0,
+    }
+
+    domande_ruoli = [
+            {
+                "domanda": "1. Se fossi in una situazione di gioco decisiva, come reagiresti?",
+                "opzioni": [
+                    ("Rimarrei concentrato e cercherei di mantenere la calma per evitare errori.", "Portiere"),
+                    ("Cercherei di difendere a tutti i costi, anche a costo di fare un intervento rischioso.", "Difensore"),
+                    ("Farei un passaggio intelligente per creare un'opportunità per la squadra.", "Centrocampista"),
+                    ("Mi preparerei a fare un'azione offensiva e cercare di segnare.", "Attaccante"),
+                    ("Cercerei di fare un dribbling veloce per eludere il mio avversario.", "Ali"),
+                ]
+            },
+            {
+                "domanda": "2. Se dovessi descrivere la tua personalità in campo, quale frase ti rappresenterebbe di più?",
+                "opzioni": [
+                    ("Sono un leader silenzioso, sempre pronto a proteggere la mia porta.", "Portiere"),
+                    ("Non mi faccio mai intimidire, anche quando l'avversario sembra invincibile.", "Difensore"),
+                    ("Il gioco passa sempre per me, mi piace fare assist e cambiare il ritmo della partita.", "Centrocampista"),
+                    ("Sono uno che non si arrende mai, e so come fare il gol decisivo.", "Attaccante"),
+                    ("Sono un dribblatore nato, la velocità è la mia arma principale.", "Ali"),
+                ]
+            },
+            {
+                "domanda": "3. Se avessi la possibilità di esprimere la tua forza, come lo faresti?",
+                "opzioni": [
+                    ("Sfrutterei il mio istinto e la mia capacità di reazione per fermare i tiri.", "Portiere"),
+                    ("La mia forza sta nell'intercettare palloni e proteggere la difesa a ogni costo.", "Difensore"),
+                    ("Sono bravo a leggere il gioco, mi piace essere al centro dell'azione e creare passaggi decisivi.", "Centrocampista"),
+                    ("La mia forza è la mia rapidità e capacità di colpire al momento giusto.", "Attaccante"),
+                    ("La mia forza è nella velocità e nell'abilità di saltare le difese avversarie.", "Ali"),
+                ]
+            },
+            {
+                "domanda": "4. Se potessi scegliere una caratteristica per migliorare il tuo gioco, quale sarebbe?",
+                "opzioni": [
+                    ("Maggiore agilità e riflessi per parare ogni tipo di tiro.", "Portiere"),
+                    ("Capacità di anticipare il gioco e fermare gli avversari prima che arrivino alla porta.", "Difensore"),
+                    ("Essere più incisivo nei passaggi e avere una visione più ampia del gioco.", "Centrocampista"),
+                    ("Essere più preciso nel colpo e nell'abilità di trovare la porta.", "Attaccante"),
+                    ("Poter correre ancora più velocemente e dribblare con maggiore fluidità.", "Ali"),
+                ]
+            },
+            {
+                "domanda": "5. Se fossi in un'azione da gol, come ti comporteresti?",
+                "opzioni": [
+                    ("Mi preparerei a parare ogni tiro e a difendere la porta con ogni mezzo.", "Portiere"),
+                    ("Cercherei di anticipare l'attaccante e bloccare la sua azione prima che si arrivi alla conclusione.", "Difensore"),
+                    ("Mi farei trovare pronto a servire un assist decisivo per l'attaccante.", "Centrocampista"),
+                    ("Mi tufferei in avanti per cercare di segnare al volo o con un colpo di testa.", "Attaccante"),
+                    ("Cercherei di tagliare fuori la difesa e prepararmi a ricevere il pallone per segnare.", "Ali"),
+                ]
+            },
+            {
+                "domanda": "6. Come ti comporteresti in un momento di alta pressione durante la partita?",
+                "opzioni": [
+                    ("Rimango calmo, perché ogni decisione che prendo potrebbe essere decisiva.", "Portiere"),
+                    ("Non mi faccio distrarre e cerco sempre di mantenere l'ordine in difesa.", "Difensore"),
+                    ("Mi concentro sul controllo del gioco e cerco di guidare la squadra verso il successo.", "Centrocampista"),
+                    ("Cercherei di mantenere alta la pressione, provando a segnare il gol che decide la partita.", "Attaccante"),
+                    ("Mi impegnerò a correre e fare dribbling con velocità per creare una superiorità numerica.", "Ali"),
+                ]
+            },
+            {
+                "domanda": "7. Se ti trovassi in una situazione completamente imprevista, tipo un uragano che arriva mentre fai la spesa, come reagiresti?",
+                "opzioni": [
+                    ("Mi rifugio nel ripiano più basso del negozio e prego che finisca presto.", "Portiere"),
+                    ("Cerco di tenere il gruppo compatto e di organizzare una strategia per sopravvivere.", "Difensore"),
+                    ("Non mi faccio prendere dal panico, trovo una soluzione e organizzo tutti per uscire da quella situazione.", "Centrocampista"),
+                    ("Prendo la situazione in mano e cerco di fare tutto da solo, anche se non sono sicuro di come finirà.", "Attaccante"),
+                    ("Scappo velocemente, ma mi fermo solo per fare un'ultima danza sotto la pioggia.", "Ali"),
+                ]
+            },
+            {
+                "domanda": "8. Se dovessi organizzare una festa, quale sarebbe il tuo approccio?",
+                "opzioni": [
+                    ("Mi assicurerei che ci sia un posto tranquillo dove rifugiarmi nel caso la festa vada fuori controllo.", "Portiere"),
+                    ("Darei le regole e mi assicurerei che tutti rispettino l'ordine, ma senza esagerare.", "Difensore"),
+                    ("Sarei il tipo che tiene tutto in movimento, facendo in modo che nessuno si annoi mai.", "Centrocampista"),
+                    ("Sarei il tipo che crea l'atmosfera e fa in modo che la festa diventi leggendaria.", "Attaccante"),
+                    ("Mi assicurerei che la musica e la danza siano al top, e mi divertirei correndo da una parte all'altra.", "Ali"),
+                ]
+            },
+            {
+                "domanda": "9. Se dovessi risolvere un enigma misterioso, come ti comporteresti?",
+                "opzioni": [
+                    ("Mi metterei a studiare i dettagli, cercando di trovare ogni indizio possibile, anche nelle cose più piccole.", "Portiere"),
+                    ("Cercherei di bloccare ogni possibile fuga, non lasciando nulla al caso, ogni elemento va esaminato.", "Difensore"),
+                    ("Passerei in rassegna ogni pista e farei domande a tutti per trovare la soluzione.", "Centrocampista"),
+                    ("Cercherei di prendere in mano la situazione, facendo intuire la soluzione, ma senza essere troppo ovvio.", "Attaccante"),
+                    ("Cercando di guardare le cose da un'altra angolazione e risolvere con l'intuizione e la velocità.", "Ali"),
+                ]
+            },
+            {
+                "domanda": "10. Se un alieno ti chiedesse di insegnargli come sopravvivere sulla Terra, quale sarebbe la tua lezione principale?",
+                "opzioni": [
+                    ("Stai sempre attento e pronto a reagire a qualsiasi cosa accada, anche se è inaspettato.", "Portiere"),
+                    ("Devi avere una mentalità forte, sapersi difendere e non lasciarsi sopraffare da nulla.", "Difensore"),
+                    ("Non perdere mai il ritmo, devi saper adattarti e guidare la situazione.", "Centrocampista"),
+                    ("Non aver paura di affrontare la vita di petto e prendere ogni opportunità che ti si presenta.", "Attaccante"),
+                    ("Devi essere veloce, non fermarti mai e sapere quando è il momento giusto per scappare o affrontare la sfida.", "Ali"),
+                ]
+            },
+            {
+                "domanda": "11. Se dovessi scegliere un superpotere per una giornata, quale sarebbe?",
+                "opzioni": [
+                    ("Poter fermare il tempo e riflettere su ogni decisione importante.", "Portiere"),
+                    ("Poter prevedere il futuro e sapere dove agiranno gli altri prima che lo facciano.", "Difensore"),
+                    ("Poter leggere la mente degli altri per capire immediatamente cosa vogliono o cosa stanno pensando.", "Centrocampista"),
+                    ("Poter moltiplicarti in mille versioni di te stesso e fare tutto da solo.", "Attaccante"),
+                    ("Poter muoverti alla velocità della luce, evitando ogni ostacolo e sorpassando chiunque.", "Ali"),
+                ]
+            },
+            {
+                "domanda": "12. Se fossi in un film d'azione, quale sarebbe il tuo ruolo?",
+                "opzioni": [
+                    ("Il tipo che interviene sempre al momento giusto per salvare la situazione, con calma e precisione.", "Portiere"),
+                    ("Il protagonista che difende la sua squadra, affrontando ogni pericolo con determinazione.", "Difensore"),
+                    ("Il genio dietro le quinte che guida l'azione e coordina ogni movimento con saggezza.", "Centrocampista"),
+                    ("Il protagonista che affronta ogni nemico di petto e porta il destino nelle proprie mani.", "Attaccante"),
+                    ("Il personaggio rapido e scaltro che sfugge pericolo con un solo movimento e salva tutti.", "Ali"),
+                ]
+            },
+            {
+                "domanda": "13. Se dovessi scegliere una frase per motivare la tua squadra prima della finale, quale sarebbe?",
+                "opzioni": [
+                    ("Rimaniamo compatti, non permettiamo a nessuno di superare la nostra barriera!", "Portiere"),
+                    ("Non c'è posto per errori, ogni movimento deve essere calcolato e preciso.", "Difensore"),
+                    ("Controlliamo il ritmo e facciamo scorrere il gioco, nessuno potrà fermarci!", "Centrocampista"),
+                    ("Se non segniamo ora, non ci sarà mai un altro momento!", "Attaccante"),
+                    ("Siamo più veloci di chiunque, corriamo e facciamo vedere chi siamo!", "Ali"),
+                ]
+            },
+            {
+                "domanda": "14. Se fossi un animale, quale sarebbe il tuo comportamento?",
+                "opzioni": [
+                    ("Un gufo, sempre attento e vigile, pronto a scattare quando è il momento giusto.", "Portiere"),
+                    ("Un cane da guardia, sempre in guardia e pronto a difendere il suo territorio.", "Difensore"),
+                    ("Un delfino, agile, giocoso e sempre in movimento per divertirsi con gli altri.", "Centrocampista"),
+                    ("Un leone, pronto a dominare la scena e a fare tutto per vincere.", "Attaccante"),
+                    ("Una gazzella, veloce e leggera, con la capacità di cambiare direzione in un attimo.", "Ali"),
+                ]
+            },
+            {
+                "domanda": "15. Se fossi un personaggio storico, quale sarebbe il tuo approccio alla vita?",
+                "opzioni": [
+                    ("Mi ispiro a un generale che studia le strategie con attenzione e risponde sempre con calma.", "Portiere"),
+                    ("Mi ispiro a un imperatore, sempre pronto a difendere il mio impero e a mantenere l'ordine.", "Difensore"),
+                    ("Mi ispiro a un filosofo che guida il popolo con saggezza e decisioni equilibrate.", "Centrocampista"),
+                    ("Mi ispiro a un conquistatore, non mi fermo mai e mi prendo sempre ciò che voglio.", "Attaccante"),
+                    ("Mi ispiro a un esploratore, sempre in movimento e pronto a scoprire nuove frontiere.", "Ali"),
+                ]
+            },
+            {
+                "domanda": "16. Se dovessi sopravvivere su un'isola deserta, quale sarebbe il tuo piano?",
+                "opzioni": [
+                    ("Costruirei una fortezza impenetrabile e mi preparerei a difendermi da qualsiasi pericolo.", "Portiere"),
+                    ("Svilupperei una rete di comunicazione e cercherei di creare ordine nell'isola.", "Difensore"),
+                    ("Cercherei di creare una comunità e di far crescere l'isola, facendo arrivare tutti a collaborare.", "Centrocampista"),
+                    ("Troverei una risorsa che mi permetta di essere il più veloce a scappare o ad affrontare la situazione.", "Attaccante"),
+                    ("Correrei in giro per l'isola, esplorando ogni angolo e cercando nuove risorse senza fermarmi mai.", "Ali"),
+                ]
+            },
+            {
+                "domanda": "17. Se dovessi vincere un premio Nobel, quale sarebbe la motivazione?",
+                "opzioni": [
+                    ("Per aver mantenuto la calma e aver preso decisioni cruciali al momento giusto.", "Portiere"),
+                    ("Per aver risolto problemi difficili e aver mantenuto l'ordine in una situazione caotica.", "Difensore"),
+                    ("Per aver trovato il giusto equilibrio tra strategia e creatività in ogni situazione.", "Centrocampista"),
+                    ("Per aver risolto ogni situazione con rapidità, sempre pronto a cogliere ogni opportunità.", "Attaccante"),
+                    ("Per aver dimostrato una velocità straordinaria e una capacità di adattamento in qualsiasi situazione.", "Ali"),
+                ]
+            },
+            {
+                "domanda": "18. Se dovessi scegliere una qualità per vincere in ogni situazione, quale sarebbe?",
+                "opzioni": [
+                    ("Pazienza, per stare in guardia e rispondere solo quando il momento è perfetto.", "Portiere"),
+                    ("Determinazione, per non arrendermi mai e difendere ciò che è mio.", "Difensore"),
+                    ("Flessibilità, per adattarmi a qualsiasi situazione e non restare mai bloccato.", "Centrocampista"),
+                    ("Audacia, per agire rapidamente e senza paura, in ogni momento critico.", "Attaccante"),
+                    ("Velocità, per essere sempre un passo avanti e mai farsi raggiungere.", "Ali"),
+                ]
+            },
+    ]
+
+    for d in domande_ruoli:
+        st.markdown(f"### {d['domanda']}")
+        risposta = st.radio("", [opt[0] for opt in d["opzioni"]], key=d["domanda"])
+        for testo, ruolo in d["opzioni"]:
+            if risposta == testo:
+                punteggi_ruoli[ruolo] += 1
+
+    if st.button("🏆 Scopri chi sei!"):
+        ruolo = max(punteggi_ruoli, key=punteggi_ruoli.get)
+
+        descrizioni = {
+            "Portiere": "Sei una persona calma, riflessiva e capace di affrontare le situazioni più tese con un'incredibile lucidità. Ti piace stare un passo indietro, ma quando è il momento giusto, ti fai notare con una parata spettacolare. Nella vita, sei sempre pronto a proteggere gli altri, ma senza mai attirare troppa attenzione. La tua tranquillità è la chiave del tuo successo.",
+            "Difensore": "Il tuo motto nella vita è 'Difendere è il miglior attacco'. Sei una persona pragmatica, che non si fa mai prendere alla sprovvista. Quando tutti corrono dietro a mille cose, tu rimani saldo, pronto a bloccare ogni ostacolo. In campo, sei sempre al posto giusto al momento giusto, mentre nella vita ti prendi cura di mantenere l'ordine e la stabilità.",
+            "Centrocampista": "Il centrocampo è la tua zona di comando, dove tutto accade e tu sei sempre al centro di ogni movimento. Se la vita fosse una partita, tu saresti il motore che tiene tutto in moto, capace di connettere idee, persone e situazioni. Non ti spaventa mai un cambio di strategia, anzi, lo affronti con il sorriso e una buona dose di creatività.",
+            "Attaccante": "Sei sempre pronto ad andare all'attacco e non ti tiri mai indietro di fronte a una sfida. Nella vita, come in campo, sei il primo a farti avanti quando c'è da prendere l'iniziativa. Hai una spiccata capacità di cogliere ogni opportunità e fare la differenza al momento giusto. Chi ti ferma? Nessuno. La tua energia è contagiosa e la tua ambizione è sempre inarrestabile.",
+            "Ali": "Sei una persona che non si ferma mai, sempre alla ricerca di nuovi orizzonti da esplorare. Sei veloce, dinamico e capace di adattarti a ogni situazione. La tua libertà è il tuo punto di forza, e non hai paura di correre e cambiare direzione all'ultimo secondo. In campo come nella vita, la tua leggerezza e la tua capacità di vedere oltre ti fanno volare sopra ogni ostacolo.",
+        }
+
+
+        immagini = {
+            "Portiere": "https://static.sky.it/images/skysport/it/calcio/serie-a/2019/12/24/classifica-parate-portieri-serie-a-2019/og_portieri_serie_a_lapresse.jpg",
+            "Difensore": "https://staticfanpage.akamaized.net/wp-content/uploads/sites/27/2024/06/GettyImages-2158607603.jpg",
+            "Centrocampista": "https://wips.plug.it/cips/sport.virgilio.it/cms/2021/06/barella_89lajsl0zkbe1879e31abq774.jpg",
+            "Attaccante": "https://th.bing.com/th/id/OIP.GDYLhka6MOX0xfOENfUISQHaE7?rs=1&pid=ImgDetMain",
+            "Ali": "https://th.bing.com/th/id/OIP.P5hh3hflvJxoKkTXqaU0ngHaFY?w=281&h=204&c=7&r=0&o=5&dpr=1.3&pid=1.7",
+         }
+
+        st.markdown("---")
+        st.markdown(f"<h2 style='text-align: center;'>🥳 Sei {ruolo}! 🥳</h2>", unsafe_allow_html=True)
+
+        # Emojis e testuale grafico
+        st.markdown("""
+            <div style='font-size: 2em; text-align: center;'>🎉🎉🎉</div>
+        """, unsafe_allow_html=True)
+
+
+        # Descrizione giocatore
+        col1, col2 = st.columns([1, 2])
+        with col1:
+            st.image(immagini[ruolo], use_container_width=True)
+        with col2:
+            st.markdown(f"<div style='padding: 1rem; background-color: #e6f2ff; border-left: 5px solid #001f3f; font-size: 1.2em;'>{descrizioni[ruolo]}</div>", unsafe_allow_html=True)
+        
+        # GIF esultanza
+
+        gif_url = "https://www.bing.com/th/id/OGC.05019b335e99294f4af04540ad238251?pid=1.7&rurl=https%3a%2f%2fwww.lfootball.it%2fwp-content%2fuploads%2f2019%2f11%2f10-CRAZY-GOAL-CELEBRATIONS-IN-WOMEN_S-FOOTBALL-2m18.1s-2m21.4s-3chL-PH0dUc-2.gif&ehk=t%2b3xsqrH%2bLPe3axLmgX5TWenUIUZQC6WA9CjgEjcqxc%3d"
         st.image(gif_url, caption="YAY!!!", use_container_width=True)
 
         # Anima la celebrazione
