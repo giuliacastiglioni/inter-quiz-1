@@ -66,6 +66,25 @@ if st.session_state.pagina == "home":
 
     st.markdown("<br>", unsafe_allow_html=True)
 
+    st.markdown(
+        """
+        <style>
+        .stButton>button {
+            font-size: 24px;
+            padding: 24px;
+            margin: 10px;
+            width: 100%;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        .stButton>button:hover {
+            background-color: #0056b3;
+        }
+        </style>
+        """, unsafe_allow_html=True
+    )
     # Pulsanti per scegliere il quiz
     if st.button("Quale calciatore dell'Inter sei?    👉"):
         with st.spinner("Caricamento quiz... 🧐"):
