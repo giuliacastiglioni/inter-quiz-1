@@ -2125,7 +2125,7 @@ elif st.session_state.pagina == "quiz_sport":
         {
             "domanda": "Immagina di avere un'invenzione che può cambiare il mondo. Qual è il primo passo che faresti?",
             "opzioni": [
-                ("Accellero il processo, mettendo a punto ogni dettaglio per raggiungere la massima velocità.", "Formula 1"),
+                ("Accelero il processo, mettendo a punto ogni dettaglio per raggiungere la massima velocità.", "Formula 1"),
                 ("Voglio che tutto sia perfetto, passo dopo passo, e ogni movimento è fatto con una precisione millimetrica.", "Tennis"),
                 ("Inizio con una reazione a catena, dove ogni mossa ha il potenziale di cambiare il corso delle cose.", "Pallavolo"),
                 ("Mi butto nell'ignoto, prendo un rischio calcolato e vedo dove mi porta.", "Atletica leggera"),
