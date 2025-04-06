@@ -365,7 +365,7 @@ elif st.session_state.pagina == "quiz_inter":
 # Pagina QUIZ PILOTI
 elif st.session_state.pagina == "quiz_piloti":
     # Inserisci qui il codice del quiz sull'Inter che hai già scritto
-    st.markdown("<h1 style='text-align: center; color: #001f3f;'>⚫ Quale pilota di Formula 1 sei?🔴 </h1>", unsafe_allow_html=True)
+    st.markdown("<h1 style='text-align: center; color: #001f3f;'>⚫Quale pilota di Formula 1 sei?🔴 </h1>", unsafe_allow_html=True)
 
     punteggi_piloti = {
         "Verstappen": 0,
